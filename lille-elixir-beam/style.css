@@ -1,0 +1,204 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6,h7 {
+    font-weight: 900;
+}
+
+html,
+body {
+    font-size: 1.3em;
+    font-family: 'Lato', sans-serif;
+    color: #4C1B1B;
+    margin: 0;
+    padding: 0;
+}
+
+.website-label {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-weight: 900;
+    color: #CD2C24;
+    background-color: #000;
+}
+
+.small-text {
+    font-size: 75%;
+}
+
+/* ahahahha */
+.not-important {
+    color: #81A9AD;
+}
+
+.important {
+    font-weight: 900;
+    color: #F2594B;
+}
+
+.masked {
+    display: none;
+}
+
+.diapositive {
+    background-color: #FFF;
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 15px solid #CD2C24;
+    transition: all 0.5s ease-in-out;
+}
+
+.active-slide {
+    opacity: 1.0;
+}
+
+.inactive-slide {
+    opacity: 0.0;
+}
+
+.diapositive > div {
+    margin: auto;
+}
+
+.text-center {
+     text-align: center;
+}
+
+.text-center > * {
+    text-align: center;
+
+}
+
+.text-center > ul {
+    text-align: left;
+    max-width: 300px;
+    margin: auto;
+}
+
+.twitter{
+    list-style-type: none;
+    background-image: url("images/twitter.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 52px;
+}
+
+.github{
+    list-style-type: none;
+    background-image: url("images/github.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 52px;
+    margin-top: 22px;
+}
+
+
+.main-title{
+    margin: 0;
+    font-size: 250%;
+    color: #CA4201;
+}
+
+.sub-title{
+    margin: 0px 0px 8% 0px;
+    font-size:140%;
+}
+
+.trace {
+    position: relative;
+    bottom: 10px;
+    right: 10px;
+    align-self: flex-end;
+    background-color: #CD2C24;
+    color: white;
+    font-weight: 900;
+    padding: 4px;
+}
+
+ul {
+    text-align: left;
+}
+li {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.section > * {
+    text-align: center;
+}
+.section > h1 {
+    color: #CA4201;
+}
+
+.section > h1, .section > h2 {
+    margin: 0;
+}
+
+blockquote {
+    margin-top: 54px;
+    background-color: #F2F2F2;
+    padding: 32px;
+    color: #999;
+    border-radius: 12px;
+}
+
+pre {
+    font-size: 120%;
+}
+
+table {
+    margin-bottom: 32px;
+}
+
+h5{
+    margin: 0;
+}
+pre {
+    margin: 0;
+    padding: 0;
+}
+
+code{
+    margin: 0;
+    padding: 0;
+}
+
+.ttt {
+    word-spacing: 30px;
+}
+
+.center {
+    width: 100%;
+    text-align: center;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+.to-bottom {
+    margin-top: 120px;
+}
+
+
+.multicell {
+    display: flex;
+}
+
+.multicell > div {
+    margin: 8px;
+}
