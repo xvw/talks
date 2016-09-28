@@ -1,0 +1,671 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900italic,900,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css" />
+    <title>présentation Javascript Chti'JS</title>
+    <link rel="stylesheet" href="hl/styles/xcode.css">
+    <script src="hl/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+
+    <div class="diapositive">
+
+      <div>
+        <h1 class="main-title">Js_of_ocaml (entre autres)</h1>
+        <h2 class="sub-title">Xavier Van de Woestyne</h2>
+        <ul>
+          <li class="twitter">nukifw</li>
+          <li class="github">xvw</li>
+        </ul>
+
+        
+        <div class="website-label">
+          derniercri.io
+          <!-- <span class="not-important small-text"> -->
+          <!--   (Fait en OCaml... mais tout le monde s'en fiche :v) -->
+          <!-- </span> -->
+        </div>
+        
+      </div>
+    </div>
+
+    
+    <div class="diapositive">
+
+      <div class="section">
+        <h1>Introduction</h1>
+        <h2>Du DHTML à Js_of_ocaml en passant par jQuery</h2>
+
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Dégommer la concurrence</h2>
+        <ul>
+          <li>
+            <span class="important">Netscape</span>
+            VS <span class="important">Internet Explorer</span>
+          </li>
+          <li>Course à la <i>feature</i></li>
+          <li>Un langage pour ajouter des effets aux pages</li>
+          <li><span class="important">Brendan Eich</span>, en 1995</li>
+        </ul>
+        
+      </div>
+      
+    </div>
+
+
+
+     <div class="diapositive">
+      
+      <div>
+        <h2>Un langage conçu en 10 jours</h2>
+        <ul>
+          <li>
+            Initialement nommé <span class="important">Livescript</span>
+          </li>
+          <li>
+            Renommé  <span class="important">Javascript</span>, pour
+            attirer les médias (que de convictions!)
+          </li>
+          <li>
+            Inspiré par
+            <span class="important">Scheme</span> et
+            <span class="important">Self</span>
+          </li>
+        </ul>
+
+        <blockquote>
+          Ce qui explique sa forme "orientée prototype" et fonctionnelle
+        </blockquote>
+        
+      </div>
+      
+    </div>
+
+     
+    <div class="diapositive">
+
+      <div>
+        <h2>DOM 0, welcome DHTML</h2>
+        <pre><code class="html">&lt;a href=&quot;#&quot; onclick='alert(&quot;Hello World!&quot;)'&gt;
+  Say hello !
+&lt;/a&gt;</code></pre>
+
+        <blockquote>
+          C'est à partir de ce moment que Javascript à <br />
+          commencé à traîner sa mauvaise réputation...
+        </blockquote>
+      </div>
+      
+    </div>
+
+         
+    <div class="diapositive">
+
+      <div>
+        <h2>AJAX, Bibliothèques et ECMAScript</h2>
+
+        <ul>
+          <li><span class="important">XML/HttpRequest</span>,
+            Rechargement de fragments de pages <br />
+            (déjà dans <span class="important">Rails</span> en 2005!)
+          <li><span class="important">Selecteurs</span> dans les
+            bibliothèques, faisant évoluer <br />
+            Javascript (mais aussi le CSS)</li>
+          </li>
+          <li>
+            La diversité d'implémentation implique une normalisation:<br />
+            <span class="important">ECMAScript</span>
+          </li>
+        </ul>
+       
+      </div>
+      
+    </div>
+
+
+     
+    <div class="diapositive">
+
+      <div>
+        <h2>Applications web</h2>
+        <blockquote>
+          Le monde s'est ouvert aux applications web et Javascript est <br />
+          devenu un outil "convaincant" pour décrire les interactions clients
+          <br />
+          à tel point qu'il
+          est devenu l'<span class="important">Assembleur</span>
+          du web.
+        </blockquote>
+        Certains développeurs préfèrent utiliser <span class="important">
+          leur</span> langage pour décrire des interactions.
+      </div>
+      
+    </div>
+
+
+    <div class="diapositive">
+
+      <div>
+        <h2>Javascript côté serveur</h2>
+        <ul>
+          <li><span class="important">Node.js</span></li>
+          <li><span class="important">Meteor</span> (isomorphique ... aha)</li>
+          <li><span class="important">Js_of_ocaml</span> dans Eliom (isomorphique aussi... aha2)</li>
+          <li>...</li>
+        </ul>
+
+        <h3>Pourquoi?</h3>
+        <blockquote>Plaire à beaucoup de développeurs...</blockquote>
+
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+
+      <div>
+        <h2>Compilation vers Javascript</h2>
+        <blockquote>
+          Pour les mêmes raisons que ceux qui se servent de Javascript<br />
+          côté client, pourquoi apprendre un autre langage ? 
+        </blockquote>
+        <ul>
+          <li><span class="important">Coffescript</span> (Surement le plus
+            populaire)</li>
+          <li><span class="important">Dart</span> (Proposant une VM)</li>
+          <li><span class="important">Haxe</span> (Compile vers... tout :D)</li>
+          <li><span class="important">OPA</span> (...)</li>
+          <li><span class="important">Js_of_ocaml</span></li>
+          <li>...</li>
+        </ul>
+      </div>
+      
+    </div>
+
+
+    <div class="diapositive">
+
+      <div>
+        <h2>Profit</h2>
+        <blockquote>
+          Sucrage syntaxique, analyse statique
+        </blockquote>
+        <ul>
+          <li><span class="important">Typescript</span> (Typage optionnel)</li>
+          <li><span class="important">Funscript</span> (Typage statique)</li>
+          <li><span class="important">Purescript</span> (Typage statique)</li>
+          <li><span class="important">Flow</span> (Analyse statique de code)</li>
+          <li>...</li>
+          <li><span class="important">Js_of_ocaml</span> (of course ;))</li
+        </ul>
+      </div>
+      
+    </div>
+
+
+
+    <div class="diapositive">
+
+      <div>
+        <h2>Avantage du typage statique</h2>
+        <ul>
+          <li>Aider l'ordinateur à prévenir les erreurs courantes</li>
+          <li>Greffer des informations sémantiques</li>
+          <li>Polymorphisme paramétrique (types généralisés fixables)</li>
+          <li>Diriger son code par les types</li>
+        </ul>
+        <blockquote>
+          On arrête de se prendre pour un compilateur en écrivant des <br />
+          <span class="important">milliers</span> de jeux de tests (même
+          s'il en faut toujours, parfois !)
+        </blockquote>
+      </div>
+      
+    </div>
+
+
+
+    <div class="diapositive">
+
+      <div class="section">
+        <h1>Js_of_ocaml</h1>
+        <h2>Enfin, Enfin !</h2>
+
+      </div>
+      
+    </div>
+
+
+    <div class="diapositive">
+          
+      <div>
+        <h2>OCaml</h2>
+        <ul>
+          <li>Un langage très expressif</li>
+          <li>Multi-paradigme</li>
+          <li>Très performant</li>
+          <li>Statiquement et fortemment typé</li>
+        </ul>
+        <blockquote>
+          Js_of_ocaml s'inscrit dans la suite de logiciel
+          <span class="important">Ocsigen</span>
+        </blockquote>
+      </div>
+
+    </div>
+
+    
+    <div class="diapositive">
+
+        <div>
+            <h2>OCaml en dehors de la fac</h2>
+            <ul>
+                <li>Microsoft</li>
+                <li>Dassault</li>
+                <li>Janestreet</li>
+                <li>Citrix</li>
+                <li>Facebook</li>
+                <li>Besport</li>
+                <li>...</li>
+            </ul>
+        </div>
+
+    </div>
+
+    
+
+    <div class="diapositive">
+          
+      <div>
+        <h2>Ocsigen</h2>
+        <blockquote>
+          <span class="important">OC</span>aml
+          <span class="important">SI</span>te
+          <span class="important">GEN</span>erator
+        </blockquote>
+        Une bibliothèque <strong>libre</strong> d'outils pour construire<br />
+        une application web avec OCaml
+      </div>
+
+    </div>
+
+    
+    <div class="diapositive">
+          
+      <div>
+        <h2>Ocsigen</h2>
+        <ul>
+          <li>
+            <span class="important">Eliom</span> :
+            Cadriciel de développement serveur
+          </li>
+          <li>
+            <span class="important">Lwt</span> :
+            Bibliothèque pour la concurrence
+          </li>
+          <li>
+            <span class="important">TyXML</span> :
+            Production de XML (et par extension de HTML5)  statiquement typé
+          </li>
+          <li>
+            <span class="important">Macaque</span> :
+            Production de requêtes statiquement typé
+          </li>
+          <li>
+            <span class="important">Js_of_ocaml</span> :
+            Compilation et typage du Javascript
+          </li>
+          <li>
+            <span class="important">O'Browser</span> :
+            VM OCaml embarquée dans un navigateur
+          </li>
+          <li>
+            ...
+          </li>
+          
+        </ul>
+      </div>
+
+    </div>
+
+    
+    <div class="diapositive">
+          
+      <div>
+
+        <h2>Js_of_ocaml?</h2>
+
+        <blockquote>
+          Compilateur du byte-code OCaml vers Javascript
+        </blockquote>
+
+        <ul>
+          <li>Résolution de soucis de portées</li>
+          <li>Typage statique du Javascript</li>
+          <li>Extensions de syntaxes</li>
+          <li>Support très complet du OCaml</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="diapositive">
+          
+      <div>
+
+        <h2>Performances</h2>
+
+        <ul>
+          <li>Isolation du code mort</li>
+          <li>Optimisations simples (inline)</li>
+          <li>Optimisations bas niveau (à la
+            <span class="important">ASM.js</span>)</li>
+        </ul>
+
+      </div>
+    </div>
+
+
+    <div class="diapositive">
+          
+      <div>
+
+        <h2>Concurrence</h2>
+        <blockquote>
+          <span class="important">Lwt</span> est un système de multithreading
+          collaboratif
+        </blockquote>
+        <ul>
+          <li>Exécution simultanée de thread</li>
+          <li>Grande bibliothèque (entrées/sorties, réseau)</li>
+          <li>Style monadique</li>
+          <li>Adapté au cadre d'exécution mono-threadé de Javascript</li>
+        </ul>
+
+      </div>
+    </div>
+
+
+    <div class="diapositive">
+
+      <div class="section">
+        <h1>Ecrire du code Javascript en OCaml</h1>
+        <h2>La part des choses</h2>
+        
+      </div>
+      
+    </div>
+
+    
+
+    <div class="diapositive">
+
+      <div>
+          <h2>Distinction syntaxique au sein du code</h2>
+          <table>
+              <tr>
+                  <td>
+                      <pre><code class="ocaml">ocaml_obj # message</code></pre>
+                  </td>
+                  <td>
+                      <pre><code class="ocaml">js_obj ## message</code></pre>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <pre><code class="ocaml">new ocaml_class(args)</code></pre>
+                  </td>
+                  <td>
+                      <pre><code class="ocaml">jsnew javascript_class(args)</code></pre>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <pre><code class="ocaml">"OCaml string"</code></pre>
+                  </td>
+                  <td>
+                      
+                      <pre><code class="ocaml">Js.string "Javascript string"</code></pre>
+                  </td>
+              </tr>
+               <tr>
+                  <td>
+                      <pre><code class="ocaml">[|1;2;3|]</code></pre>
+                  </td>
+                  <td>
+                      
+                      <pre><code class="ocaml">Js.array [|1;2;3|]</code></pre>
+                  </td>
+              </tr>
+          </table>
+        
+      </div>
+      
+    </div>
+
+
+
+    <div class="diapositive">
+
+      <div>
+          <h2>Apports de OCaml</h2>
+          <ul>
+              <li>
+                  Type option pour éviter les 
+                  <span class="important">
+                      undefined
+                  </span>
+              </li>
+              <li>
+                  Vérification statique
+              </li>
+              <li>
+                  Erreurs explicites (à la compilation)
+              </li>
+              <li>
+                  Expressivité du langage
+                  <ul>
+                      <li>Déclaration de types</li>
+                      <li>Objets (transformables en Json)</li>
+                      <li>Modules et foncteurs</li>
+                  </ul>
+              </li>
+          </ul>
+          <blockquote>
+              Le workflow de programmation est réduit
+          </blockquote>
+      </div>
+      
+    </div>
+
+
+    <div class="diapositive">
+        <div>
+            <h2>Monades</h2>
+            <pre><code class="ocaml">type 'a t</code></pre>
+            <pre><code class="ocaml">val return :'a -> 'a t</code></pre>
+            <pre><code class="ocaml">val bind :'a t -> ('a -> 'b t) -> 'b t</code></pre>
+            <blockquote>Généralisation sur les types paramétrés<br /> pour permettre la composition</blockquote>
+        </div>
+    </div>
+
+    <div class="diapositive">
+        <div>
+            <h2>Promises (ou Futures, "no idea")</h2>
+            <ul>
+                <li><span class="important">when.resolve</span> :  return</li>
+                <li><span class="important">when</span> :  bind</li>
+            </ul>
+            <blockquote>
+                Composition forte !
+            </blockquote>
+        </div>
+    </div>
+    
+
+
+    <div class="diapositive">
+        <div>
+            <h2>Lwt pour la concurrence</h2>
+            <pre><code class="ocaml">let _ =
+  let open Lwt_js_events in
+    async_loop click Dom_html.document
+      (fun event () -> Dom_html.window ## alert (Js.string "Hello"))</code></pre>
+        </div>
+    </div>
+
+    
+    <div class="diapositive">
+        <div>
+            <h2>Binding de bibliothèques</h2>
+            <ul>
+                <li>Accès à du code non vérifié</li>
+                <li>Wrapping de callback OCaml</li>
+                <li>Construction de prototypes Javascript</li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <div class="diapositive">
+        <div>
+            <h2>Jquery statiquement typé</h2>
+            <ul>
+                <li>Constantes en types sommes</li>
+                <li>Typage du gestionnaire d'évènement</li>
+                <li>Syntaxe de sélection uniforme</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+        
+    <div class="diapositive">
+
+      <div class="section">
+        <h1>Applications client-serveur</h1>
+        <h2>Utilisation d'Ocsigen</h2>
+        
+      </div>
+      
+    </div>
+
+    
+    
+    <div class="diapositive">
+          
+        <div>
+
+        <h2>Exemple de client-server</h2>
+
+        Pas possible ici :D 
+      </div>
+    </div>
+
+
+            
+    <div class="diapositive">
+
+      <div>
+          <h2>Séparation des couches</h2>
+          <ul>
+              <li><code>{server{ ... }}</code></li>
+              <li><code>{client{ ... }}</code></li>
+              <li><code>{shared{ ... }}</code></li>
+          </ul>
+          <h3>Communication forte</h3>
+          <ul>
+              <li>Le serveur peut appeler des fonctions clients</li>
+              <li>le client peut appeler des fonctions serveurs</li>
+          </ul>
+        
+      </div>
+      
+    </div>
+
+      
+    <div class="diapositive">
+
+        <div class="section">
+            <h1>Soucis actuels</h1>
+            <h2>Il y en a... je l'avoue</h2>
+         
+      </div>
+      
+    </div>
+
+    
+    <div class="diapositive">
+
+        <div>
+            <ul>
+                <li>Difficile à prendre en main</li>
+                <li>Communication avec le monde extérieur parfois <br/>
+                    douloureuse</li>
+                <li>Déboguage en aval complexe</li>
+                <li>Documentation... :'( </li>
+            </ul>    
+        </div>
+        
+    </div>
+
+    
+    <div class="diapositive">
+
+        <div class="section">
+            <h1>Apports réels</h1>
+            <h2>Il y en a aussi... je l'affirme</h2>
+         
+      </div>
+      
+    </div>
+
+
+        <div class="diapositive">
+
+        <div>
+            <ul>
+                <li>Performance</li>
+                <li>Déboguage en ammont simple</li>
+                <li>Diminution du workflow</li>
+                <li>Modèles de programmation convaincants (et multiples)</li>
+                <li>Communication entre les couches aisée</li>
+                <li>Beaucoup moins de tests unitaires</li>
+                <li>C'est du OCaml :P</li>
+            </ul>    
+        </div>
+
+    </div>
+
+
+    
+
+    <div class="diapositive">
+
+      <div class="text-center">
+        <h1 class="main-title">FIN !</h1>
+        <h2 class="sub-title">Le typage statique est fort !</h2>
+        <ul class="not-important">
+          <li><strong>Icones</strong>: simpleicons.org</li>
+          <li><strong>Police</strong>: Lato</li>
+        </ul>
+      </div>
+      
+    </div>
+
+
+    <script type="text/javascript" src="nukislider.js"></script>
+  </body>
+</html>

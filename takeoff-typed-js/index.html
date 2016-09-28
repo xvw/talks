@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900italic,900,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
+    <title>présentation JavaScript Chti'JS</title>
+    <link rel="stylesheet" href="hl/styles/xcode.css">
+    <script src="hl/highlight.pack.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+
+    <div class="diapositive">
+
+      <div>
+        <h1 class="main-title">Pourquoi typer du JavaScript</h1>
+        <h2 class="sub-title">Xavier Van de Woestyne</h2>
+        <ul>
+          <li class="twitter">nukifw</li>
+          <li class="github">xvw</li>
+        </ul>
+
+        
+        <div class="website-label">
+          derniercri.io
+        </div>
+        
+      </div>
+    </div>
+
+        
+    <div class="diapositive">
+
+      <div class="section">
+        <h2>Roadmap</h2>
+          <h4>Un peu sur JavaScript</h4>
+          <h4>Un peu sur le typage</h4>
+          <h4>Quelques solutions</h4>
+          <h4>L'analyse statique</h4>
+          <h4>Flow</h4>
+      </div>
+      
+    </div>
+
+
+    
+    <div class="diapositive">
+
+      <div class="section">
+        <h1>Opinion sur JavaScript</h1>
+        <h2>Un langage cool</h2>
+      </div>
+      
+    </div>
+
+    
+    <div class="diapositive">
+
+      <div class="section">
+        <blockquote>
+          Même si moi, j'aime beaucoup en dire du mal :v
+        </blockquote>
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Enormément d'avantages</h2>
+        <ul>
+          <li>Expressif</li>
+          <li>Le futur du multi-platforme</li>
+          <li>Client-server (isomorphique)</li>
+          <li>Eco-système riche</li>
+          <li>Emmergeance de motifs de conception</li>
+        </ul>
+        
+      </div>
+      
+    </div>
+
+     <div class="diapositive">
+      
+      <div>
+        <h2>Beaucoup d'utilisateurs cools </h2>
+
+        <div class="image-enum">
+          <img src="images/1.png" />
+          <img src="images/2.png" />
+          <img src="images/3.jpeg" />
+          <img src="images/11.png" />
+          <img src="images/4.jpeg" /><br />
+          <img src="images/5.jpeg" />
+          <img src="images/10.png" />
+          <img src="images/6.jpeg" />
+          <img src="images/9.png" />
+          <img src="images/ah.jpg" />
+        </div>
+        <p>
+          Liste non exhaustive de gens qui me poussent à<br />
+          considérer JavaScript comme un langage cool.
+        </p>
+        
+      </div>
+     </div>
+
+     
+    <div class="diapositive">
+      
+      <div>
+        <h2>Quelques inconvénients :'(</h2>
+        <ul>
+          <li>Renommage conceptuel</li>
+          <li>Règles d'évaluations hasardeuses</li>
+          <li>Typage faible et chelou</li>
+          <li>Eco-système riche</li>
+        </ul>
+        
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div class="section">
+        <h1>Sur le typage</h1>
+        <h2>Definitions, mythes</h2>
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Qu'est ce qu'un type</h2>
+        <blockquote>
+          Un système axiomatique. <br />
+          Un ensemble de valeurs muni d'opérations<br />
+          pouvant être:
+        </blockquote>
+        <ul>
+          <li>Prédéfini/Enuméré</li>
+          <li>Paramétré</li>
+          <li>Composé/Hiérarchisé</li>
+          <li>Abstrait</li>
+        </ul>
+        
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <blockquote>
+          Introduits par la logiques en réponse au paradoxe<br />
+          de la théorie (initiale) des ensemble.(Russel)
+        </blockquote>
+        <ul>
+          <li>Turing complétude du <span class="important">
+              Lambda-Calcul
+          </span></li>
+          <li>Correspondance <span class="important">formules/types</span></li>
+        </ul>
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Mythes</h2>
+        <ul>
+          <li>Obligation de spécifier le type de tout élément utilisé</li>
+          <li>Perte de beaucoup de flexibilité</li>
+          <li>Compilation obligatoire</li>
+          <li>Très "matheux"</li>
+        </ul>
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Avantage typage</h2>
+        <ul>
+          <li>Sûreté/fiabilité du programme</li>
+          <li>Feedback/"documentation"
+            <pre><code>List.map : ('a -> 'b) -> 'a list ->'b list</code></pre>
+          </li>
+          <li>Expressivité</li>
+        </ul>
+      </div>
+      
+    </div>
+
+
+    <div class="diapositive">
+      
+      <div class="section">
+        <h1>Entre types et tests</h1>
+        <h2>Un bon système de type n'éradique pas les tests</h2>
+        <h3>Malheureusement</h3>
+      </div>
+      
+    </div>
+
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Tests faillibles</h2>
+        <ul>
+          <li>Tests confinés (occulte l'environnement)</li>
+          <li>Contrat d'exécution raisonné</li>
+          <li>Raisonné par un humain</li>
+        </ul>
+      </div>
+      
+    </div>
+
+    
+
+    <div class="diapositive">
+      
+      <div class="section">
+        <h1>Tests + Types = &hearts;</h1>
+        <h2>Et peut être un jour... des types dépendants :D </h2>
+        <h3>en 2099 si tout va bien !!!</h3>
+      </div>
+      
+    </div>
+
+
+    
+    <div class="diapositive">
+      
+      <div class="section">
+        <h1>Alternatives éprouvées</h1>
+        <h2>JavaScript vu comme de l'assembleur</h2>
+      </div>
+      
+    </div>
+
+
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Langages compilés</h2>
+        <ul>
+          <li>Dart</li>
+          <li>Haxe</li>
+          <li>Js_of_OCaml</li>
+          <li>TypeScript</li>
+        </ul>
+        
+      </div>
+      
+    </div>
+
+    
+    <div class="diapositive">
+      
+      <div>
+        <h2>Effet de bord</h2>
+        <ul>
+          <li>Nouvelle syntaxe (proche de ce qu'on aime!)</li>
+          <li>Incompatibilité avec l'écosystème (Binding obligatoire)</li>
+        </ul>
+
+        <blockquote>
+          Sur des énormes code-base... c'est un peu fatiguant.
+        </blockquote>
+        
+      </div>
+      
+    </div>
+    
+
+
+    <div class="diapositive">
+      
+      <div class="section">
+        <h1>L'analyse statique</h1>
+        <h2>Bénéfice d'une phase avant l'exécution</h2>
+      </div>
+      
+    </div>
+    
+
+
+    <div class="diapositive">
+      
+      <div>
+        <h2><span class="important">
+          Analyse statique != compilation
+        </span></h2>
+        <ul>
+          <li>N'altère pas le code produit</li>
+          <li>Une compilation implique généralement <br />
+            une analyse statique
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+    
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Outils d'analyse syntaxique</h2>
+        <ul>
+          <li>JSHint, JSLint, ESLint</li>
+          <li>Flow
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Flow</h2>
+        <ul>
+          <li>Pluggable (<code>/* @flow */</code>)</li>
+          <li>Préserve la syntaxe de JavaScript</li>
+          <li>Extension contrôlée : annotations de types</li>
+        </ul>
+
+        <blockquote>On se repose sur l'expressivité de JavasSript</blockquote>
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Deux interfaçages notables</h2>
+        <ul>
+          <li>TypeScript</li>
+          <li>React + JSX</li> 
+        </ul>
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Apports de Flow</h2>
+        <ul>
+          <li>Typage statique accessible à une grosse code-base</li>
+          <li>Très peu voir aucune modification à effectuer</li>
+          <li>Jest : super framework de tests unitaires</li>
+          <li>Bénéficie de l'avantage des langages typés par annotation</li>
+          <li>Ouverture vers les design dirigé par les types</li>
+        </ul>
+      </div>
+      
+    </div>
+
+    <div class="diapositive">
+      
+      <div>
+        <h2>Conclusions</h2>
+        <ul>
+          <li>Il existe des alternatives au JavaScript classique</li>
+          <li>Beaucoup de langages emmergeants (nouveau projet)</li>
+          <li>Des outils de raisonnements (projet avancé)</li>
+          <li>Type is life... lalallalalala</li>
+        </ul>
+      </div>
+      
+    </div>
+    
+    
+    <div class="diapositive">
+
+      <div class="section">
+        <h1>... FIN ! Merci :D</h1>
+        <h2>(psst, faites du JS_Of_OCaml, c'est super!!!)</h2>
+      </div>
+      
+    </div>
+
+    
+    
+    <script type="text/javascript" src="nukislider.js"></script>
+  </body>
+</html>
+

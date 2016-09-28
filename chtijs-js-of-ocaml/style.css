@@ -1,0 +1,170 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6,h7 {
+    font-weight: 900;
+}
+
+html,
+body {
+    font-size: 1.3em;
+    font-family: 'Lato', sans-serif;
+    color: #192021;
+    margin: 0;
+    padding: 0;
+}
+
+.website-label {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    font-weight: 900;
+    color: #FB671A;
+}
+
+.small-text {
+    font-size: 75%;
+}
+
+/* ahahahha */
+.not-important {
+    color: #81A9AD;
+}
+
+.important {
+    font-weight: 900;
+    color: #CA4201;
+}
+
+.masked {
+    display: none;
+}
+
+.diapositive {
+    background-color: #FFF;
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 15px solid #FB671A;
+}
+
+.diapositive > div {
+    margin: auto;
+}
+
+.text-center {
+     text-align: center;
+}
+
+.text-center > * {
+    text-align: center;
+
+}
+
+.text-center > ul {
+    text-align: left;
+    max-width: 300px;
+    margin: auto;
+}
+
+.twitter{
+    list-style-type: none;
+    background-image: url("images/twitter.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 52px;
+}
+
+.github{
+    list-style-type: none;
+    background-image: url("images/github.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 52px;
+    margin-top: 22px;
+}
+
+
+.main-title{
+    margin: 0;
+    font-size: 250%;
+    color: #CA4201;
+}
+
+.sub-title{
+    margin: 0px 0px 8% 0px;
+    font-size:140%;
+}
+
+.trace {
+    position: relative;
+    bottom: 10px;
+    right: 10px;
+    align-self: flex-end;
+    background-color: #FB671A;
+    color: white;
+    font-weight: 900;
+    padding: 4px;
+}
+
+ul {
+    text-align: left;
+}
+li {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.section > * {
+    text-align: center;
+}
+.section > h1 {
+    color: #CA4201;
+}
+
+.section > h1, .section > h2 {
+    margin: 0;
+}
+
+blockquote {
+    margin-top: 32px;
+    background-color: #FFCC7A;
+    padding: 18px;
+    color: #452217;
+}
+
+pre {
+    font-size: 120%;
+}
+
+table {
+    margin-bottom: 32px;
+}
+
+h5{
+    margin: 0;
+}
+pre {
+    margin: 0;
+    padding: 0;
+}
+
+code{
+    margin: 0;
+    padding: 0;
+}
+
+.ttt {
+    word-spacing: 30px;
+}
