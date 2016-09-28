@@ -200,5 +200,9 @@ code{
 }
 
 .multicell > div {
-    margin: 8px;
+    margin: 4px;
+}
+
+.multicell blockquote {
+    margin: 0;
 }
