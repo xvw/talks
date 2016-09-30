@@ -91,7 +91,7 @@ body {
 
 .twitter{
     list-style-type: none;
-    background-image: url("images/twitter.png");
+    background-image: url("../common/images/twitter.png");
     background-repeat: no-repeat;
     background-position: left center;
     padding-left: 52px;
@@ -99,7 +99,7 @@ body {
 
 .github{
     list-style-type: none;
-    background-image: url("images/github.png");
+    background-image: url("../common/images/github.png");
     background-repeat: no-repeat;
     background-position: left center;
     padding-left: 52px;
