@@ -14,7 +14,7 @@ all: slideshow.js
 # Generic rules
 
 %.byte: %.ml
-	$(OCAML) $(QUASAR) $(SLIDES) -linkpkg -o ../common/$(@) $(<)
+	$(OCAML) $(QUASAR) $(SLIDES) -linkpkg -o $(@) $(<)
 
 %.js: %.byte
-	$(JSOCAML) -o $(@) $(<)
+	$(JSOCAML) -o ../common/$(@) $(<)

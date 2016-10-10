@@ -19,4 +19,42 @@
  *
 *)
 
-module S = QuaSlideshow
+open Quasar
+
+module Requirement : QuaSlideshow.Configuration =
+struct
+
+  let label          = ref None
+
+  let selector       = ".quasar-slide"
+  let parent         = Element.getById "quasar-slides"
+  let deal_with_data = []
+  let succ           = QuaSlideshow.default_succ
+  let pred           = QuaSlideshow.default_pred
+
+
+  let set_label slide =
+    match !label with
+    | None -> Element.set_data "label" "Hello !" slide
+    | Some x -> Element.set_data "label" x slide
+                         
+  let init_slide ~length ~slides slide =
+    match Element.get_data "label" slide with
+      | None -> ignore (set_label slide)
+      | Some x -> label := Some x
+
+
+  let update = QuaSlideshow.default_update
+                 
+  let before  ~length ~slides cursor =
+    QuaSlideshow.default_before
+      ~length
+      ~slides
+      cursor
+      update
+    
+
+end
+
+module Slider = QuaSlideshow.Simple(Requirement)
+let () = Slider.start ()
