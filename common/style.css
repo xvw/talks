@@ -11,7 +11,7 @@ html {
 }
 
 .removable {
-    display: none;
+    opacity: 0.0;
 }
 
 body {
@@ -25,6 +25,7 @@ body {
     font-family: "omnes-pro",sans-serif;
     font-style: normal;
     font-weight: 400;
+    background-color: #A1BCD7;
 }
 
 
@@ -44,6 +45,7 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
+    transition: all .7s ease-in-out;
 }
 
 .quasar-slide > div {
@@ -52,11 +54,21 @@ body {
 
 .quasar-slide-active {
     opacity: 1.0;
+    transform-origin: 0 0;
+    left: 0;
+    right: 0;
 }
 
 .quasar-slide-inactive {
     opacity: 0.0;
-    transform: scaleX(0.0)
+}
+
+.from-left {
+    left: -200px;
+}
+
+.from-right {
+    right: 200px;
 }
 
 .logo-dc {
