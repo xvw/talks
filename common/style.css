@@ -4,40 +4,112 @@
     box-sizing: border-box;
 }
 
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+.removable {
+    display: none;
+}
+
 body {
+    font-size: 1.4rem;
+    line-height: 1.5;
     height: 100vh;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+    font-family: "omnes-pro",sans-serif;
+    font-style: normal;
+    font-weight: 400;
 }
 
 
-main#quasar-slides {
+#quasar-slides {
     flex: 1;
-    background-color: red;
-    display: flex;
-    flex-direction: column;
+    background-color: #FFF;
+    position: relative;
 }
 
 .quasar-slide {
-    background-color: green;
+    background-color: #FFF;
+    position: absolute;
+    left: 0; top: 0; bottom: 0; right: 0;
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-    
+    display: flex;
+    flex-direction: column;
+}
+
+.quasar-slide > div {
+    margin: auto;
 }
 
 .quasar-slide-active {
-    display: flex; 
+    opacity: 1.0;
 }
 
 .quasar-slide-inactive {
-    display: none;
+    opacity: 0.0;
+    transform: scaleX(0.0)
+}
+
+.logo-dc {
+    width: 200px;
 }
 
 .front-page {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #A1BCD7;
+}
+
+.front-page > div {
+    text-align: center;
+}
+
+.front-page h1 {
+    color: white;
+    font-weight: 100;
+    font-size: 3.6rem;
+    margin: 0;
+}
+
+.front-page h1 > span {
+    color: #FEDE00;
+}
+
+header {
+    background-color: #A1BCD7;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+header h1 {
+    margin: 0;
+    color: #FFF;
+    font-weight: 900;
+    font-size: 1.2rem;
+    padding-top: 6px;
+}
+
+
+header .logo-dc {
+    width: 120px;
+}
+
+footer {
+    display: flex;
+    background-color: #A1BCD7;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px;
+    color: white;
+    font-weight: 900;
 }
