@@ -36,7 +36,8 @@
 	  <ul>
 	    <li>Développeur à Dernier Cri</li>
 	    <li>Programmation depuis <span class="important">1999</span></li>
-	    <li>Travail de recherche (un peu particulier)</li>
+	    <li>Travail de recherche (un peu particulier) qui n'avance pas</li>
+	    <li>Funkywork et RMEx</li>
 	    <li>
 	      <span class="important">@xvw</span>
 	      sur Github et Medium,
@@ -80,18 +81,32 @@
 	</div>
       </section>
 
+      <section class="quasar-slide">
+ 	<div class="centered">
+	  <h1 class="section-title">Objectifs</h1>
+	  <ul>
+	    <li>Donner quelques éléments de vocabulaire</li>
+	    <li>Stimuler un intérêt pour d'autres méthodes (donc ne pas aller trop loin)</li>
+	    <li>Partager une opinion</li>
+	    <li>Ne pas endormir avec des exemples de code</li>
+	    <li>FAIRE DE LA PROMO :v</li>
+	  </ul>
+	</div>
+      </section>
+
       <section data-label="Plan de la présentation"  class="quasar-slide">
  	<div class="centered">
 	  <h1 class="section-title">Topics</h1>
 	  <ul class="toc">
 	    <li class="important">Tests unitaires</li>
+	    <li class="important">Analyse statique et compilation</li>
 	    <li class="important">Systèmes de types</li>
-	    <li>Définition et exemples</li>
+	    <li>Objectifs et définition</li>
 	    <li>Polymorphisme</li>
 	    <li class="important">Systèmes de types algébriques</li>
 	    <li>Qu'est-ce que c'est que ça :v ?</li>
 	    <li>Designer par les types</li>
-	    <li>En 1997, à la NASA</li>
+	    <li>En 1999, à la NASA</li>
 	    <li class="important">Le futur des langages et des pratiques</li>
 	  </ul>
 	</div>
@@ -113,11 +128,18 @@
 	</div>
       </section>
 
-      <!-- <section class="quasar-slide"> -->
-      <!-- 	<div class="centered"> -->
-      <!-- 	  <h1 class="section-title">Quel est l'objectif du TDD</h1> -->
-      <!-- 	</div> -->
-      <!-- </section> -->
+      <section class="quasar-slide">
+      	<div class="centered">
+      	  <h1 class="section-title">Quel est l'objectif du TDD</h1>
+	  <ul>
+	    <li>Réfléchir, en ammont à ce qui relou (doc/spec)</li>
+	    <li>Créer un contrat entre un programme et des utilisateurs</li>
+	    <li>Controller le flux de transformation d'un programme (CI)</li>
+	    <li>Avoir un beau petit badge "passing succeeded"</li>
+	    <li>Dans un tooling moderne, générer la documentation</li>
+	  </ul>
+      	</div>
+      </section>
 
       <section class="quasar-slide">
  	<div class="centered">
@@ -128,6 +150,394 @@
 	</div>
       </section>
 
+      <section class="quasar-slide">
+      	<div class="centered">
+      	  <h1 class="section-title">Ce que les tests ne
+	    <span class="important">font pas</span>
+	  </h1>
+	  <ul>
+	    <li>Inférer des bogues potentiels</li>
+	    <li>Garantir la viabilité, au runtime, d'une application</li>
+	  </ul>
+	  <blockquote class="normal">
+	    Un test ne couvre <span class="important">QUE</span> ce que le
+	    développeur a anticipé !
+	  </blockquote>
+      	</div>
+      </section>
+
+      <section class="quasar-slide">
+      	<div class="centered">
+	  <img alt="" class="small-pic" src="images/tests.jpg"/>
+	</div>
+      </section>
+      
+      <section data-label="JE PENSE QUE MOI, L'INFORMATION EN BAS DE L'ECRAN, 
+			   JE NE SERS A RIEN !
+			   " class="quasar-slide">
+      	<div class="centered">
+	  <h1 class="section-title">
+	    Ce qui a tué Smalltalk pourrait tuer Ruby*
+	  </h1>
+	  <a href="https://www.youtube.com/watch?v=YX3iRjKj7C0">
+	    La vidéo du mec brillant qui le dit</a>
+	  <blockquote class="normal">
+	    Les développeurs écrivent "trop de tests" pour le "fait" de faire des tests. (Entre
+	    autres.)
+	  </blockquote>
+	  <span class="important">*</span> : Avant de savoir qu'il faudrait attendre
+	  3 ans pour avoir une<br/> nouvelle version...
+	</div>
+      </section>
+
+      <section data-label="Parlons de tests unitaires"  class="quasar-slide">
+	<div class="centered">
+	  <blockquote class="normal">
+	    Une bonne approche serait de déléguer certaines vérifications<br />
+	    triviales à une machine qui ne fait (à priori) pas d'erreur.
+	  </blockquote>
+	</div>
+      </section>
+
+      <section data-label="Compilation et analyse statique"
+	       class="quasar-slide section-front">
+	<div class="centered">
+	  <h1>Analyse statique et compilation</h1>
+	  <h2>Deux pratiques qui ne sont pas équivalentes</h2>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Analyse statique</h1>
+	  <ul>
+	    <li>Obtenir des informations sur un programme sans l'exécuter</li>
+	    <li>Permet de repérer des erreurs/maladresses de manière formelle</li>
+	  </ul>
+	  <h1 class="section-title">Compilation</h1>
+	  <ul>
+	    <li>Transformer du code dans un langage source vers un langage cible</li>
+	    <li>Beaucoup de compilateurs produisent une analyse statique sur le code</li>
+	    <li>Beaucoup de compilateurs optimisent le résultat</li>
+	  </ul>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Les bénéfices d'une phase de compilation</h1>
+	  <ul>
+	    <li>Généralement, les programmes sont plus performant</li>
+	    <li>Ils le sont encore plus lorsque le compilateur optimise l'output</li>
+	    <li>Permet de réveler beaucoup d'erreurs via des formalismes</li>
+	  </ul>
+	  <h1 class="section-title">Les faiblesses d'une phase de compilation</h1>
+	  <ul>
+	    <li>Moins de flexibilité à l'exécution</li>
+	    <li>Procédure de compilation pouvant être longue (C++)</li>
+	    <li>Nécéssite une compilation par architecture (parfois)</li>
+	  </ul>
+	</div>
+      </section>
+
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">D'un langage source vers un langage cible</h1>
+	  <ul>
+	    <li>Le langage cible peut être un code machine (C/C++/Rust/Go/OCaml)</li>
+	    <li>Ou un langage intermédiaire (byte-code) (Java/OCaml/Erlang)</li>
+	  </ul>
+	  <blockquote class="normal">
+	    En général, un byte-code ou du code machine est un langage très très simple. <br>
+	    Au passage au langage cible, le code produit perd des informations.<br/>
+	    D'où le besoin d'une analyse statique fine.
+	  </blockquote>
+
+	  <span class="important">On peut considérer JavaScript comme un byte-code...</span>
+	  <ul>
+	    <li>Js_of_ocaml</li>
+	    <li>Typescript</li>
+	    <li>Elm</li>
+	  </ul>
+	</div>
+      </section>
+
+      
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">L'ère du numérique ! (lol pas digital)</h1>
+	  <ul>
+	    <li>Les machines manipulent des nombres, ils les stockent, les font transiter,
+	      <br>communiquent en s'envoyant des nombres<br/><br />
+	    </li>
+	    <li>La programmation vise à communiquer avec une machine. On l'exprime <br>
+	      généralement dans un langage que l'on comprend pour le convertir <br>
+	      vers un langage que la machine comprend
+	    </li>
+	  </ul>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Comme tout est nombre</h1>
+	  <blockquote class="normal">
+	    Les langages bas-niveaux (et les byte-codes) sont généralement peu expressifs<br>
+	    car ils sont relativement proches de la machine sur laquelle ils s'exécutent.
+	  </blockquote>
+
+	  L'assembleur ne consiste qu'a modifier de manière <span class="important">
+	    arithmétique</span> le contenu des espaces<br> mémoires de l'ordinateur.
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <blockquote class="normal">
+	    Comme l'ordinateur ne manipule, au final, que des nombres, il ne peut pas<br>
+	    vérifier "de lui même" qu'une opération est valide. (Par exemple :
+	    <code>"Hello" + 45</code>)
+	  </blockquote>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Le typage comme une action sémantique</h1>
+	  <ul>
+	    <li>Le typage permet d'étiquetter des valeurs</li>
+	    <li>Il permet donc d'augmenter la connaissance de l'ordinateur sur les <br>
+	      valeurs qu'il manipule</li>
+	    <li>L'analyse statique se chargera de vérifier la cohérence dun programme<br>
+	    avant de tout transformer en nombres</li>
+	  </ul>
+	  De plus, le typage donne, aussi, à l'humain, des informations sur une fonction :<br>
+	  <code>char toUpperCase(char);</code>
+	</div>
+      </section>
+
+
+      <section data-label="Le typage"  class="quasar-slide section-front">
+	<div>
+	  <h1>Typage statique de programmes</h1>
+	  <h2>La (vraie) bonne pratique qui prévient les bogues</h2>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Formellement, le typage</h1>
+	  <ul>
+	    <li>Une extension à la théorie des ensembles</li>
+	    <li>Toute fonction possède un domaine</li>
+	    <li>On interdit toute opération impossible lors de l'analyse statique</li>
+	  </ul>
+	  <blockquote class="normal">
+	    Concrètement, le typage c'est un système axiomatique. Un ensemble de valeurs<br/>
+	    muni d'opérations pouvant être :
+	    <ul>
+	      <li>Prédéfini/Enuméré</li>
+	      <li>Paramétré (liste, tableaux)</li>
+	      <li>Composé/Hiérarchisé</li>
+	      <li>Abstrait</li>
+	    </ul>
+	  </blockquote>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <blockquote class="normal">
+	    En gros, on ne mélange pas les torchons et les serviettes.
+	  </blockquote>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Typage dynamique </h1>
+	  On type au besoin, durant l'exécution du programme (Ruby, Python)
+	  <h1 class="section-title">Typage statique</h1>
+	  L'analyse statique vérifie le typage
+	  <blockquote class="normal">
+	    En général, les programmes statiquement typés plantent moins à<br/>
+	    l'exécution que les programmes dynamiquement typés.
+	  </blockquote>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Quelques éléments de vocabulaires</h1>
+	  <ul>
+	    <li>Typage fort/faible</li>
+	    <li>Inférence des types (C VS OCaml)</li>
+	    <li>Polymorphisme (interface unique pour entités multiples) :
+	      <ul>
+		<li>Paramétrique (via monomorphisme, par exemple)</li>
+		<li>Ad Hoc (surcharge)</li>
+		<li>Par sous typage (inclusion)</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</div>
+      </section>
+
+      <section data-label="Le typage algébrique"
+	       class="quasar-slide section-front">
+	<div>
+	  <h1>Typage algébrique : pour la flexibilité vérifée</h1>
+	  <h2>A la OCaml, Haskell, Elm : créons nos types</h2>
+	</div>
+      </section>
+
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Entre construction de types et types</h1>
+	  Dans un langage typé, on trouve des types primitifs : 
+	  <ul>
+	    <li>Des entiers</li>
+	    <li>Des flottants</li>
+	    <li>Des chaines de caractères</li>
+	    <li>Des caractères</li>
+	    <li>Des booléens</li>
+	    <li>Des tableaux, des listes</li>
+	    <li>etc.</li>
+	  </ul>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">On peut aussi créer ses types par combinaison</h1>
+	  <ul>
+	    <li>Par conjonction (les types produits)</li>
+	    <li>Par disjonction (les types sommes)</li>
+	  </ul>
+	  <blockquote class="normal">
+	    Chaque type peut être composé, y comprit des types qui ont été construits.<br/>
+	    Couplé à la récursivité et à la correspondance de motifs, on <br>
+	    peut décrire une grande partie des structures de données.
+	  </blockquote>
+	  <h2>Exemples en live !</h2>
+	</div>
+      </section>
+
+
+      <section data-label="Un Proof-of-Concept"
+	       class="quasar-slide section-front">
+	<div>
+	  <h1>En 1999, à la NASA : Mars Climate Orbiter</h1>
+	  <h2>Où comment le typage peut faire économiser des millions de dollars</h2>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Mise en contexte</h1>
+	  <ul>
+	    <li>Le 23 Mars 1999:la sonde "Mars Climate Orbiter"<br> tente d'effectuer sa manoeuvre d'insertion autour de l'orbite de Mars via une procédure entièrement<br/> automatisée.<br/><br/></li>
+	    <li>Sans rentrer dans les détails, la sonde a suivi une trajectoire beaucoup<br>
+	    trop basse par rapport à sa vitesse et boum.</li>
+	  </ul>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <img alt="" src="images/boum.png"/>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Pourquoi? </h1>
+	  <blockquote class="normal">
+	    La sonde recevait la poussée de ses micropropulseurs en <span class="important">Livres-force.seconde</span><br>
+	    (une unité de mesure anglo-saxonne) et le logiciel interne de la sonde traitait<br>
+	    ces données comme s'il s'agissait de <span class="important">Newton.seconde</span>.<br>
+	    Cette non-concordance de données a entraîné des modifications de la trajectoire<br>
+	    de la sonde, l'amenant à sa destruction et faisant perdre à la NASA près<br>
+	    de 125 millions de dollars.
+	  </blockquote>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Un problème très complexe à détecter</h1>
+	  <h2>In a metric world... everything is a Float !</h2>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Les types fantômes à la rescousse</h1>
+	  <blockquote class="normal">
+	    C'est le passage un peu compliqué donc je vais tâcher d'être clair ! 
+	  </blockquote>
+	  <h2>Mots-clés</h2>
+	  <ul>
+	    <li>Abstraction de types</li>
+	    <li>Variants polymorphes</li>
+	    <li>Types paramétrés</li>
+	    <li>Types fantômes</li>
+	  </ul>
+	  
+	</div>
+      </section>
+
+      <section data-label="Le futur ?"
+	       class="quasar-slide section-front">
+	<div>
+	  <h1>Vers quoi les langages s'orientent-ils</h1>
+	  <h2>Des types partout (youhou)</h2>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <ul>
+	    <li>De plus en plus de langages s'inspirent de ML</li>
+	    <li>JavaScript a pris le coche</li>
+	    <li>Les langages se fonctionnalisent</li>
+	    <li>FRP, Scalabilité, sûreté</li>
+	  </ul>
+	  
+	</div>
+      </section>
+
+      <section data-label="La lumière au fond du tunnel"
+	       class="quasar-slide section-front">
+	<div>
+	  <h1>Pour terminer</h1>
+	  <h2>Vous êtes presque libre !</h2>
+	</div>
+      </section>
+
+      <section class="quasar-slide">
+	<div class="centered">
+	  <h1 class="section-title">Le typage, c'est un super-pouvoir !</h1>
+	  <ul>
+	    <li>Plus de sureté dans les programmes</li>
+	    <li>Un outil de design éprouvé</li>
+	    <li>Une direction prise par beaucoup de technologies</li>
+	    <li>Un espace où la recherche a été très productive ! (GADT's, Types dépendants)</li>
+	  </ul>
+	  
+	</div>
+      </section>
+
+      <section data-label="FIN"
+	       class="quasar-slide section-front">
+	<div>
+	  <h1>Merci beaucoup pour cette opportunité ! (J'adore parler ...)</h1>
+	  <h2>Questions/Réactions ?</h2>
+	</div>
+      </section>
+      
     </main>
 
     <footer class="quasar-removable">

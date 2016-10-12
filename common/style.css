@@ -67,11 +67,11 @@ body {
 }
 
 .from-left {
-    left: -200px;
+    left: -64px;
 }
 
 .from-right {
-    right: 200px;
+    right: 64px;
 }
 
 .logo-dc {
@@ -247,4 +247,24 @@ ul * {
 
 h2 {
     font-weight: 100;
+}
+
+
+blockquote.normal {
+    text-align: left;
+    background-color: #4D80AA;
+    width: 100%;
+    margin-top: 34px;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.small-pic {
+    width: 300px;
+    border-radius: 4px;
+}
+
+
+a {
+    color: #FEDE00;
 }
