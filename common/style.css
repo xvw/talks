@@ -214,3 +214,37 @@ ul * {
     display: flex;
     margin: 34px;
 }
+
+.schema {
+    width: 75%;
+}
+
+.toc {
+    padding: 0;
+    margin: 0;
+}
+
+.toc > li {
+    list-style-type: none;
+}
+
+.toc > li.important {
+    margin-top: 12px;
+}
+
+
+.section-front * {
+    text-align: center;
+    margin: 0;
+}
+
+
+
+.section-front h1 {
+    font-weight: 900;
+    color: #FEDE00;
+}
+
+h2 {
+    font-weight: 100;
+}
