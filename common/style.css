@@ -24,8 +24,9 @@ body {
     flex-direction: column;
     font-family: "omnes-pro",sans-serif;
     font-style: normal;
-    font-weight: 400;
-    background-color: #A1BCD7;
+    font-weight: 100;
+    background-color: #FFF;
+    color: #FFF;
 }
 
 
@@ -36,7 +37,7 @@ body {
 }
 
 .quasar-slide {
-    background-color: #FFF;
+    background-color: rgb(45, 117, 185);
     position: absolute;
     left: 0; top: 0; bottom: 0; right: 0;
     width: 100%;
@@ -52,6 +53,7 @@ body {
     margin: auto;
 }
 
+
 .quasar-slide-active {
     opacity: 1.0;
     transform-origin: 0 0;
@@ -61,6 +63,7 @@ body {
 
 .quasar-slide-inactive {
     opacity: 0.0;
+    background-color: #EFEFF1;
 }
 
 .from-left {
@@ -78,26 +81,42 @@ body {
 .front-page {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #A1BCD7;
+    background-color: #FFF;
+    color: rgb(45, 117, 185);
+    border-left: 10px solid  rgb(45, 117, 185);
 }
 
 .front-page > div {
-    text-align: center;
+    text-align: right;
+    height: 100%;
+    width: 100%;
+    padding: 32px;
+    
 }
 
-.front-page h1 {
-    color: white;
+.blueprint {
+    width: 300px;
+}
+
+.main-title {
     font-weight: 100;
     font-size: 3.6rem;
     margin: 0;
 }
 
-.front-page h1 > span {
+.main-title > span {
     color: #FEDE00;
+    font-weight: 100;
 }
 
+.section-title {
+    color: #FEDE00;
+    font-weight: 100;
+}
+
+
 header {
-    background-color: #A1BCD7;
+    background-color: rgb(45, 117, 185);
     padding: 8px;
     display: flex;
     justify-content: space-between;
@@ -106,9 +125,9 @@ header {
 header h1 {
     margin: 0;
     color: #FFF;
-    font-weight: 900;
-    font-size: 1.2rem;
-    padding-top: 6px;
+    font-weight: 100;
+    font-size: 0.8rem;
+    padding-top: 8px;
 }
 
 
@@ -118,10 +137,52 @@ header .logo-dc {
 
 footer {
     display: flex;
-    background-color: #A1BCD7;
+    background-color: rgb(45, 117, 185);
     justify-content: space-between;
     width: 100%;
     padding: 8px;
     color: white;
-    font-weight: 900;
+    font-weight: 100;
+    font-size: 0.8rem;
+}
+
+.enum {
+    padding: 0;
+    margin: 0;
+}
+
+.enum li {
+    margin-top: 12px;
+}
+
+.twitter{
+    list-style-type: none;
+    background-image: url("../common/images/twitter.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 52px;
+}
+
+.github{
+    list-style-type: none;
+    background-image: url("../common/images/github.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 52px;
+}
+
+.medium{
+    list-style-type: none;
+    background-image: url("../common/images/medium.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 52px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.centered * {
+    text-align: center;
 }

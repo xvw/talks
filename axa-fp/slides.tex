@@ -1,0 +1,478 @@
+\documentclass{beamer}
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+\usepackage[frenchb]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usetheme{metropolis}
+\usefonttheme{professionalfonts} % required for mathspec
+\usepackage{mathspec}
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+\usepackage{xspace}
+\usepackage{tikz}
+\usepackage{graphicx,xcolor}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{multicol}
+
+\newcommand{\adjustimg}{% Horizontal adjustment of image
+  \checkoddpage%
+  \ifoddpage\hspace*{
+		\dimexpr\evensidemargin-\oddsidemargin}\else\hspace*{
+			-\dimexpr\evensidemargin-\oddsidemargin}\fi%
+}
+
+
+\newcommand{\centerimg}[2][width=\textwidth]{% Center an image
+  \makebox[\textwidth]{\adjustimg\includegraphics[#1]{#2}}%
+}
+
+\title[Programmation fonctionnelle]{Programmation fonctionnelle,\newline introduction}
+\author{Xavier Van de Woestyne}
+\date{5 Juillet 2016}
+\institute{Dernier Cri}
+\setbeamerfont{section in toc}{size=\small}
+\setbeamerfont{subsection in toc}{size=\tiny}
+\setbeamerfont{subsubsection in toc}{size=\tiny}
+
+\begin{document}
+
+
+
+	\maketitle
+
+
+	\begin{frame}{Bonjour !}
+		\begin{itemize}
+			\item \alert{@vdwxv} sur Twitter, \alert{@xvw} sur Github ;
+			\item développeur à \alert{Dernier Cri} ;
+			\item travail de recherche qui n'avance pas ;
+			\item de 2000 à 2008 : \textbf{PHP} (et d'autres langages impératifs) ;
+			\item depuis 2008 : \textbf{Ruby}, \alert{Erlang}, \alert{Haskell}, \alert{OCaml/Fsharp} ;
+			\item Meetup \alert{LilleFP}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Sommaire}
+    \begin{multicols}{2}
+		    \tableofcontents
+        \addtocontents{toc}{~\vspace{-3\baselineskip}}
+    \end{multicols}
+	\end{frame}
+
+	\section{Préambule}
+
+	\subsection{Objectifs}
+	\begin{frame}{Objectifs}
+		\begin{itemize}
+			\item Présentation sommaire ;
+			\item démystification (je suis nul en math...);
+			\item présentation de motifs ;
+		\end{itemize}
+		Présenter des concepts appropriables dans 80\% des langages
+		modernes.
+	\end{frame}
+
+  \begin{frame}{Pourquoi ?}
+    \begin{itemize}
+      \item Passé et futur de la programmation ;
+      \item facile à appréhender ;
+      \item OCaml, Haskell, FSharp, Scala, Clojure, Ruby, Pytho, JavaScript, C++, CSharp, Smalltalk, Java ;
+      \item Elixir, Elm ;
+      \item FRP, continuations/promesses, parallélisme ;
+      \item découverte.
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    Tout commence avec ...
+  \end{frame}
+
+	\subsection{Mise en contexte historique}
+	\subsubsection{Logique formelle et décision}
+	\begin{frame}{Le problème de la décision}
+		Comment définir l'ensemble des expressions calculables?
+		\begin{quote}
+			En logique formelle,
+			une propriété mathématique est dite décidable s'il existe un procédé
+			mécanique qui détermine, au bout d'un temps fini, si elle est vraie ou
+			fausse dans n'importe quel contexte possible.
+		\end{quote}
+	\end{frame}
+
+	\begin{frame}
+		\centerimg[width=\textwidth, height=250pt]{figures/logic.pdf}
+	\end{frame}
+
+	\begin{frame}{Formalismes pour représenter \newline l'intégralité des fonctions calculables}
+		Trois réponses pour le prix d'une ...
+		\begin{itemize}
+			\item \textbf{1935} : \alert{le lambda-calcul} de Church ;
+			\item \textbf{1935} : les fonctions récursives de Gödel et Kleen ;
+			\item \textbf{1936} : les machines de Turing.
+		\end{itemize}
+		C'est une découverte (et non une invention).
+	\end{frame}
+
+  \begin{frame}{Types et preuves}
+    Les systèmes formels servant la logique sont étroitement liés aux preuves,
+    donc, par extension, aux systèmes de types :
+    \begin{itemize}
+      \item Lutter contre le paradoxe de la logique formelle (ex: Paradoxe du Barbier) ;
+      \item Correspondance preuve-programme (l'isomorphisme de Curry-Howard) : logique mathématique <-> Informatique théorique ;
+      \item Hindley-Milner, Martin Löf.
+    \end{itemize}
+  \end{frame}
+
+	\subsubsection{Le $\lambda$-Calcul}
+	\begin{frame}{Le $\lambda$-Calcul, la base}
+		\begin{itemize}
+			\item Un langage théorique ;
+			\item la base de tout langage fonctionnel ;
+			\item initialement non typé, mais peut l'être (Système F).
+		\end{itemize}
+		Seulement trois éléments gramaticaux
+		\begin{itemize}
+			\item \textbf{Les variables} : x, y, ..., des lambda-termes ;
+			\item \textbf{les applications} :  f x, est un lambda-terme si f et x sont des lambda-termes ;
+			\item \textbf{les abstractions} :  $\lambda x.v$ est un lambda-terme si x est une variable et v un lambda-terme.
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Quelques constructions}
+
+		\begin{columns}[t]
+			\begin{column}{5cm}
+				\textbf{Les entiers de Church :}
+			\end{column}
+			\begin{column}{5cm}
+				\textbf{Les Boolééns :}
+			\end{column}
+
+		\end{columns}
+
+		\begin{columns}[t]
+ 			\begin{column}{5cm}
+
+				\begin{gather}
+					0 = \lambda fx.x \\
+					1 = \lambda fx.f \; x \\
+					2 = \lambda fx.f \; (f \; x) \\
+					3 = \lambda fx.f \; (f \; (f \; x)) \\
+				\end{gather}
+
+ 			\end{column}
+
+ 			\begin{column}{5cm}
+
+				\begin{gather}
+					true = \lambda ab.a \\
+					false = \lambda ab.b \\
+					or = \lambda pq.p\;p\;q \\
+					and = \lambda pq.p\;q\;p
+				\end{gather}
+
+ 			\end{column}
+		\end{columns}
+	\end{frame}
+
+	\begin{frame}{Approcher le \og pur \fg orienté Objets}
+		\begin{columns}[t]
+			\begin{column}{5cm}
+				\lstinputlisting[language=Ruby, basicstyle=\tiny]{src/integer.rb}
+			\end{column}
+			\begin{column}{5cm}
+				\lstinputlisting[language=Ruby, basicstyle=\tiny]{src/bool.rb}
+			\end{column}
+
+		\end{columns}
+		Seul l'\alert{IO} ne semble pas représentable en pur objet.
+	\end{frame}
+
+	\section{Programmation fonctionnelle}
+	\subsection{Première définition}
+	\begin{frame}{Un langage fonctionnel}
+    Un langage fonctionnel est \alert{simplement} un langage qui peut
+    manipuler des fonctions comme des valeurs (lambdas).
+    \begin{description}
+      \item[1935] $\lambda$-calcul ;
+      \item[1958] Lisp (premier langage moderne !)
+    \end{description}
+    Un langage fonctionnel peut être
+    \begin{itemize}
+      \item Pur ou impur;
+      \item strict ou non strict*.
+    \end{itemize}
+    * Les paramètres doivent être évalué complètement avant d'être appelés.
+	\end{frame}
+
+  \subsection{Les fonctions}
+  \begin{frame}{Concept principal : les fonctions}
+
+    \centerimg[width=300pt, height=100pt]{figures/function.pdf}
+
+  \end{frame}
+
+  \begin{frame}
+    \lstinputlisting{src/fun.ml}
+  \end{frame}
+
+  \begin{frame}{A propos des fonctions}
+    \begin{itemize}
+      \item Les fonctions sont des valeurs ;
+      \item on peut en utiliser partout !
+      \item Les fonctions ne \textbf{prennent qu'un seul argument} (héritage du $\lambda$-calcul).
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \lstinputlisting{src/argument.ml}
+  \end{frame}
+
+  \subsubsection{Curryfication}
+  \begin{frame}{Curryfication}
+    En $\lambda$-calcul, les n-uplet n'existent pas encore. On utilise la logique combinatoire de
+    Haskell Curry et Moses Schönfinkel pour utiliser plusieurs arguments :
+    \begin{itemize}
+      \item $let \; add \; x \; y \; = \; x + y$
+      \item $let \; add \; = \; fun \; x \; y \; \rightarrow \; x + y$
+      \item $let \; add \; = \; fun \; x \; \rightarrow \; (fun \; y  \; \rightarrow \; x + y)$
+    \end{itemize}
+    Les fonctions peuvent être des valeurs d'entrée, mais aussi des valeurs de retour.
+  \end{frame}
+
+  \begin{frame}{Conséquence (cool) : l'application partielle}
+    \lstinputlisting{src/curry.ml}
+    \alert{add 1} renvoie une fonction qui attend le paramètre $y$
+  \end{frame}
+
+  \subsubsection{Expressivité}
+  \begin{frame}{Expressivité : moins de dépendance à la grammaire}
+    \lstinputlisting[language=php]{src/foreach.php}
+  \end{frame}
+
+  \begin{frame}{Expressivité : moins de dépendance à la grammaire}
+    \lstinputlisting{src/foreach.ml}
+  \end{frame}
+
+  \subsubsection{Compositions}
+  \begin{frame}{Les fonctions sont des légos...}
+    Au sens figuré :)\newline L'enjeu du programmeur fonctionnel est de combiner des fonctions
+    entre elles pour construire des fonctions plus complexes.
+    \begin{itemize}
+      \item une action atomique est une fonction ;
+      \item une collection d'action atomique est un service ;
+      \item une collection de services est une application.
+    \end{itemize}
+    Ce qui permet de reproduire une grande partie des motifs de conceptions
+    de l'orienté objet...
+  \end{frame}
+
+  \section{Les types comme outil de design}
+  \begin{frame}{Un système de type}
+    \begin{itemize}
+      \item Une extension à la théorie des ensembles ;
+      \item donne une notion de domaines aux fonctions ;
+      \item garantit une certaines sûrté ;
+      \item peut inférer un type pour une valeur ;
+      \item peut être un outil de design précis.
+    \end{itemize}
+  \end{frame}
+
+  \subsection{Types algébriques}
+
+  \begin{frame}{Types algébriques}
+
+    \begin{columns}[t]
+      \begin{column}{5cm}
+        \textbf{Types primitifs :}
+        \begin{itemize}
+          \item int ;
+          \item float ;
+          \item char ;
+          \item bool ;
+          \item string etc.
+        \end{itemize}
+      \end{column}
+      \begin{column}{5cm}
+        \textbf{Composition de types :}
+          \lstinputlisting{src/ty.ml}
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+	\begin{frame}{Plus de types}
+    \begin{columns}[t]
+      \begin{column}{4cm}
+        \textbf{Types paramétrés :}
+        \lstinputlisting{src/option.ml}
+        \begin{itemize}
+          \item $\alpha$ list ;
+          \item $(\alpha, \beta)$ Hashtbl.t
+        \end{itemize}
+      \end{column}
+      \begin{column}{6cm}
+        \textbf{Types récursifs :}
+          \lstinputlisting{src/rec.ml}
+        \textbf{Alias de types :}\newline
+        type prenom = string \newline
+        \textbf{Types abstraits}
+      \end{column}
+    \end{columns}
+  \end{frame}
+
+  \begin{frame}{Type des fonctions}
+    \begin{itemize}
+      \item x = 'h' : $char$ ;
+      \item id x : $\alpha \rightarrow \alpha$ ;
+      \item add x y : $int \rightarrow int \rightarrow int$ ;
+      \item couple x y = (x, y) : $\alpha \rightarrow \beta \rightarrow (\alpha * \beta)$ ;
+      \item map f list = $(\alpha \rightarrow \beta) \rightarrow \alpha \; list \rightarrow \beta \; list$.
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Déconstruction de types}
+    On peut déconstruire des types composés au moyen du \alert{Pattern-Matching} :
+    \lstinputlisting{src/dec.ml}
+  \end{frame}
+
+  \subsubsection{Apport des types}
+  \begin{frame}{Apport des types}
+    \begin{itemize}
+      \item \alert{Sécurité} du programme (vérification statique !) ;
+      \item documentation : $map = (\alpha \rightarrow \beta) \rightarrow \alpha \; list \rightarrow \beta \; list$ ;
+      \item Domain-Driven-Design : Types nommés/alias de types, options etc.
+      \item Possibilité de faire découler des règles \alert{simples} au moyen d'assertions \alert{simples}.
+     \end{itemize}
+  \end{frame}
+
+  \section{Propriété par le type : le monoïde}
+
+  \begin{frame}{Le monoïde}
+    Tout type $\alpha$ qui possède un opérateur de composition ($\oplus$) et un élément neutre ($e$) et qui est régit par ces trois règles :
+    \begin{itemize}
+      \item $\oplus : \alpha \rightarrow \alpha \rightarrow \alpha$ (la cloture)
+      \item $(x \oplus y) \oplus z = x \oplus (y \oplus z)$ (l'associativité)
+      \item $e \oplus x = x$ et $x \oplus e = x$ (l'élément neutre)
+    \end{itemize}
+    est un monoïde.
+  \end{frame}
+
+  \begin{frame}{Par exemple, les entiers}
+    \begin{itemize}
+      \item $\oplus = (+)$
+      \item $1+(2+3) = (1+2)+3$
+      \item $e = 0$
+    \end{itemize}
+  \end{frame}
+
+
+  \begin{frame}{Par exemple, les strings}
+    \begin{itemize}
+      \item $\oplus = String.concat$
+      \item $e = \; ''$
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Par exemple, les listes}
+    \begin{itemize}
+      \item $\oplus = List.concat$
+      \item $e = []$
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Par exemple, les endofonctions ($\alpha \rightarrow \alpha$)}
+    \begin{itemize}
+      \item $\oplus = (.) $ ($f.g x= f(g(x))$)
+      \item $e = id$
+    \end{itemize}
+  \end{frame}
+
+
+    \begin{frame}{Apport des règles : l'opérateur OPLUS}
+      Transforme une opération binaire en opération qui fonctionne sur des listes (reduce/fold)
+      \newline
+      \newline
+      $fold \oplus (liste \; de \; \alpha) : \alpha$
+    \end{frame}
+
+
+      \begin{frame}{Apport des règles : l'associativité}
+        Accumulation incrémentale, parallélise facilement. Par exemple : \newline1 + 2 + 3 + 4
+        \centerimg[width=100pt, height=80pt]{figures/divide.pdf}
+        Chaque noeud peut être calculé sur une unité de calcul différente (et parallèle, par exemple). Ou chaque
+        résultat peut être accumulé.
+      \end{frame}
+
+      \begin{frame}{Apport des règles : l'élément neutre}
+        Permet facilement de traiter les cas où des données sont invalides/manquantes.
+      \end{frame}
+
+      \begin{frame}{Dériver un type $\alpha$ en monoïde}
+        Il suffit d'implémenter l'opérateur $\oplus$, en respectant les règles évoquées. \newline
+        Il est possible de décorer un type $\beta$ en un monoïde au moyen d'une fonction de map.
+      \end{frame}
+
+      \begin{frame}
+        \centerimg[width=150pt, height=220pt]{figures/mapreduce.pdf}
+      \end{frame}
+
+      \begin{frame}{Et voici ... Map/reduce de Google}
+        Si on occulte la notion de Speed Up. (but no time ...)
+
+      \end{frame}
+
+
+  \section{Conclusion}
+  \subsection{Influence et application}
+
+  \begin{frame}{Influence et application}
+
+    \begin{itemize}
+      \item TypeScript, Flow, HaXe
+      \item Applicable à des langages non typés (les promesses)
+      \item Evolution des langages (Java, CSharp)
+      \item révolutionner la navigation dans le web (avec des continuations !)
+    \end{itemize}
+
+  \end{frame}
+
+  \subsection{Plus de super-pouvoirs}
+
+  \begin{frame}{Plus de super-pouvoirs}
+    \begin{columns}[t]
+      \begin{column}{5cm}
+        \textbf{Jutsus fonctionnels}
+        \begin{itemize}
+          \item Monades
+          \item Comonades
+          \item Flèches
+          \item Structure de données purement fonctionnelles
+        \end{itemize}
+      \end{column}
+      \begin{column}{5cm}
+        \textbf{Typages}
+        \begin{itemize}
+          \item Types existentiels
+          \item Types fantômes
+          \item Types algèbriques généralisés
+        \end{itemize}
+      \end{column}
+    \end{columns}
+
+  \end{frame}
+
+
+  \subsection{Fin}
+  \begin{frame}{Fin}
+    Merci, questions, remarques ?
+  \end{frame}
+
+\end{document}

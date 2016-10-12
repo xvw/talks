@@ -1,0 +1,7 @@
+digraph G {
+  rankdir = "LR";
+  something[shape=none];
+  function[shape=box];
+  otherThing[shape=none];
+  something -> function -> otherThing;
+}

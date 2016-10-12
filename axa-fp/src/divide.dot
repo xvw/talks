@@ -1,0 +1,7 @@
+digraph G {
+  A[label="(1+2)"];
+  B[label="(3+4)"];
+  C[label="(3+7)"];
+  A -> C;
+  B -> C;
+}

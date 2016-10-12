@@ -1,0 +1,33 @@
+digraph G {
+  subgraph a {
+    rankdir = "LR";
+    A[label="Viande Gyros", shape=box];
+    B[label="Tomate entière", shape=box];
+    C[label="Pot de sauce", shape=box];
+  }
+
+  subgraph b {
+    rankdir = "LR";
+    MAPA[label="map"];
+    MAPB[label="map"];
+    MAPC[label="map"];
+  }
+
+  subgraph c {
+    AA[label="Viande coupée", shape=box];
+    BB[label="Tomate tranchée", shape=box];
+    CC[label="Portion de sauce", shape=box];
+  }
+
+
+  PLUSA[label="(+)", shape=none]
+  PLUSB[label="(+)", shape=none]
+
+  A -> MAPA -> AA;
+  B -> MAPB -> BB;
+  C -> MAPC -> CC;
+  AA -> PLUSA -> BB;
+  BB -> PLUSB -> CC;
+  K[label="Kebab fini"];
+  CC -> K;
+}

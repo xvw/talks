@@ -1,0 +1,15 @@
+digraph G {
+  A [label="Logique formelle", shape=box];
+  B [label="Notion de décidabilité"];
+  D [label="Kurt Gödel"];
+  E [label="Alan Turing"];
+  F [label="Alonzo Church"];
+  I [label="Invalidé"];
+  A -> B;
+  D -> E;
+  D -> F;
+  E -> I -> B;
+  F -> I;
+  B -> X;
+  X [label="Nouveau formalisme ?", shape=none]
+}
