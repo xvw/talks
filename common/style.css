@@ -83,7 +83,7 @@ body {
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: #FFF;
     color: rgb(45, 117, 185);
-    border-left: 10px solid  rgb(45, 117, 185);
+    /* border-left: 10px solid  rgb(45, 117, 185); */
 }
 
 .front-page > div {
@@ -120,6 +120,7 @@ header {
     padding: 8px;
     display: flex;
     justify-content: space-between;
+    transition: all .9s ease-in-out;
 }
 
 header h1 {
@@ -144,6 +145,7 @@ footer {
     color: white;
     font-weight: 100;
     font-size: 0.8rem;
+    transition: all .9s ease-in-out;
 }
 
 .enum {
@@ -183,6 +185,32 @@ footer {
     text-align: center;
 }
 
-.centered * {
+.centered > * {
     text-align: center;
+}
+
+ul {
+    text-align: left;
+}
+
+ul * {
+    text-align: left;
+}
+
+
+.important {
+    font-weight: 900;
+    color: #FEDE00;
+}
+
+.cover {
+    width: 100%;
+}
+
+
+.clients {
+    background-color: #A1BCD7;
+    padding: 12px;
+    display: flex;
+    margin: 34px;
 }
