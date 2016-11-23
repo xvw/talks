@@ -10,6 +10,13 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+.plain,
+.plain > div {
+    width: 100%;
+    padding: 0 64px;
+}
+
+
 .removable {
     opacity: 0.0;
 }
@@ -49,8 +56,32 @@ body {
     transition: all .7s ease-in-out;
 }
 
+.quasar-slide > h1,
 .quasar-slide > div {
     margin: auto;
+}
+
+
+.section-cover,
+.section-cover > * {
+    text-align: center;
+    margin: 0;
+}
+
+.section-cover > .toc {
+    margin-top: 64px;
+    text-align: left;
+}
+
+.section-cover > .toc > ul {
+    text-align: left;
+}
+
+.section-cover > h1 {
+    font-weight: 100;
+    color: #FEDE00;
+    font-size: 200%;
+    margin: 0;
 }
 
 
@@ -59,11 +90,13 @@ body {
     transform-origin: 0 0;
     left: 0;
     right: 0;
+    z-index: 10;
 }
 
 .quasar-slide-inactive {
     opacity: 0.0;
     background-color: #EFEFF1;
+    z-index: 0;
 }
 
 .from-left {
@@ -267,4 +300,18 @@ blockquote.normal {
 
 a {
     color: #FEDE00;
+}
+
+
+.multi-columns {
+    display: flex;
+    flex-direction: row;
+}
+
+.multi-columns > div {
+    padding: 0 12px;
+}
+
+.plain > div > .multi-columns {
+    justify-content: center;
 }
