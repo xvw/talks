@@ -641,7 +641,7 @@ class Chien extends Animal {
 	  <h1>Exercice, interprêter Brainfuck</h1>
 
 	  <blockquote class="normal">
-	    Avec ES2015 entre autre
+	    
 	  </blockquote>
 
 	  <div class="multi-columns toc small-text">
