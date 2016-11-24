@@ -7,3 +7,8 @@ body {
 .small-text {
     font-size: 75%;
 }
+
+.schema {
+    width: 50%;
+    margin: auto;
+}
