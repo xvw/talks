@@ -12,3 +12,7 @@ body {
     width: 50%;
     margin: auto;
 }
+
+.strike {
+    text-decoration:line-through;
+}

@@ -131,20 +131,21 @@
 	    <div>
 	      <strong class="important">Jour 3 : Implémentations concrètes</strong>
 	      <ul>
-		<li>Requêtes distantes (+Json)</li>
-		<li>Persistance de données</li>
 		<li>Express : simplification des routes</li>
-		<li><strong>Exercice : une todo-liste</strong></li>
-		<li>WebSockets via SocketIO</li>
-		<li><strong>Exercice : utilisation des WebSockets</strong></li>
+		<li>Requêtes HTTP's</li>
+		<li>Promesses</li>
+		<li>SOAP</li>
+		<li>Persistence de données</li>
+		<li class="strike">WebSockets via SocketIO</li>
+		<li class="strike"><strong>Exercice : utilisation des WebSockets</strong></li>
 	      </ul>
 	      <strong class="important">Jour 3 : Programmation parallèle avancée</strong>
 	      <ul>
-		<li>Notion de processus</li>
-		<li><i>Clusters</i> et <i>workers</i></li>
-		<li>Stratégies d'ordonnancement</li>
-		<li>Programmation concurrente et acteurs</li>
-		<li>Implémentation manuelle de MapReduce</li>
+		<li class="strike">Notion de processus</li>
+		<li class="strike"><i>Clusters</i> et <i>workers</i></li>
+		<li class="strike">Stratégies d'ordonnancement</li>
+		<li class="strike">Programmation concurrente et acteurs</li>
+		<li class="strike">Implémentation manuelle de MapReduce</li>
 	      </ul>
 	    </div>
 	  </div>
@@ -885,13 +886,127 @@ console.log('Server running on localhost:'+port);
        <section class="quasar-slide">
 	 <div>
 	   <h1 class="section-title">Programmer avec des fichiers</h1>
-	   
+	   <h2>Un exemple simple</h2>
+	   <pre><code>let fs = require('fs');</code></pre>
+	   <pre><code>fs.readFile('./resource.json', function (er, data) {
+          console.log(data.toString);
+        })
+</code></pre>
 	 </div>
        </section>
 
        <section class="quasar-slide">
 	 <div>
-	   <h1 class="section-title">Exercice</h1>
+	   <h1 class="section-title">Exercice (gros gros truc qui arrive là)</h1>
+	   <ul>
+	     <li>Implémenter un serveur de fichiers statiques !</li>
+	     <li>Le fichier prendra en charge les fichiers .txt, .json et .html</li>
+	     <li>La partie exposée du serveur sera dans un fichier www</li>
+	     <li>Faites des petits modules et des petites fonctions</li>
+	     <li>Surtout... écrivez des tests unitaires pour vos fonctions !</li>
+	   </ul>
+	 </div>
+       </section>
+
+       <section data-label="Express !" class="quasar-slide">
+	 <div>
+	   <h1 class="section-title">Express : un framework minimaliste</h1>
+	   <ul>
+	     <li>Framework très simple basé sur Node.js</li>
+	     <li>Proche de Sinatra</li>
+	     <li>Très facile à utiliser</li>
+	     <li>Couplable avec des middlewares et du templating</li>
+	     <li><a href="http://expressjs.com/fr/">Site officiel</a></li>
+	   </ul>
+	 </div>
+       </section>
+
+       <section data-label="Express !" class="quasar-slide">
+	 <div>
+	   <h1 class="section-title">Une première application</h1>
+	   <ul>
+	     <li>Utilisation de Nodemon (à installer avec -g)</li>
+	     <li>Démonstration d'une application pas à pas</li>
+	   </ul>
+	 </div>
+       </section>
+
+       <section data-label="Requêtes HTTP" class="quasar-slide">
+	 <div>
+	   <h1 class="section-title">Effectuer des requêtes Http</h1>
+	   Node.js est une technologie serveur... donc pas d'Ajax nécéssaire !
+	   <ul>
+	     <li><a href="https://nodejs.org/api/http.html#http_http_get_options_callback">
+		 Documentation de la fonction http.get
+	     </a></li>
+	     <li><a href="https://github.com/request/request">Des requêtes plus faciles</a></li>
+	     <li><a href="https://jsonplaceholder.typicode.com/">API d'exemple</a></li>
+	   </ul>
+	   <strong>Exercice: Ecrivez un programme qui affiche proprement les données de:</strong>
+	   <ul>
+	     <li><code class="small-text">http://jsonplaceholder.typicode.com/posts</code> publier</li>
+	     <li><code class="small-text">http://jsonplaceholder.typicode.com/posts/{ID}</code> récupérer</li>
+	     <li><code class="small-text">https://jsonplaceholder.typicode.com/posts?userId={ID}</code> Récupérer</li>
+	   </ul>
+	 </div>
+       </section>
+
+       <section data-label="The Callback HELL and the promises" class="quasar-slide">
+	 <div>
+	   <h1 class="section-title">Solution au callbackHell</h1>
+	   <ul>
+	     <li><a href="http://caolan.github.io/async/">Async</a></li>
+	     <li><a href="https://github.com/kriskowal/q">Q</a></li>
+	   </ul>
+	 </div>
+       </section>
+
+       <section data-label="Mysql" class="quasar-slide">
+	 <div>
+	   <h1 class="section-title">De la persistance avec Mysql</h1>
+	   <ul>
+	     <li><a href="https://github.com/mysqljs/mysql#performing-queries">
+		 Driver Node.js de qualité
+	     </a></li>
+	     <li><a href="http://docs.sequelizejs.com/en/v3/">A voir aussi, Sequelize</a></li>
+	   </ul>
+	   Le traitement d'une base de données est assez aisé car il existe beaucoup<br/>
+	   de bibliothèques.
+	   <blockquote class="normal">
+	     N'hésitez pas à exécuter le fichier sql présent sur le dépôt (mysql-sample-1/sql).
+	   </blockquote>
+	 </div>
+       </section>
+
+       <section data-label="Exercice final !" class="quasar-slide">
+	 <div>
+	   <h1 class="section-title">Exercice final !</h1>
+	   <ul>
+	     <li>Exposer la table jeux_video sous forme d'API REST.</li>
+	     <li>Rendre la liste de tous les jeux récupérable (GET /games)</li>
+	     <li>Accéder à un jeu (GET /game/id)</li>
+	     <li>Ajouter un jeu (POST /new/game)</li>
+	     <li>Créer un client console pour tester l'API</li>
+	     <li>Eviter les Callbacks Hell !</li>
+	   </ul>
+	 </div>
+       </section>
+
+       <section data-label="Pour aller plus loin" class="quasar-slide">
+	 <div>
+	   <h1 class="section-title">Pour aller plus loin</h1>
+	   <ul>
+	     <li><a href="http://socket.io/">Du WebSocket !</a></li>
+	     <li><a href="https://nodejs.org/docs/latest/api/cluster.html">
+		 Travailler avec des clusters
+	     </a></li>
+	     <li><a href="https://nodejs.org/api/child_process.html">
+		 Des appels systèmes avec Node.js
+	     </a></li>
+	     <li><a href="https://github.com/sergtitov/NodeJS-Learning">
+		 Awesome JavaScript/Node.js (beaucoup de ressources).
+	     </a></li>
+	   </ul>
 	 </div>
        </section>
 
