@@ -1,0 +1,7 @@
+digraph "G" {
+A[label="Code source"]
+B[label="Pré-processeur->Nouveau code"]
+C[label="Compilateur"]
+D[label="Resultat"]
+A -> B -> C -> D;
+}
