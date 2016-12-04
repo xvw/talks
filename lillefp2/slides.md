@@ -25,7 +25,7 @@
 - Un seul point d'entrée dans l'application ;
 - fluidifie l'expérience utilisateur ;
 - découpler le client de l'API ;
-- très commode pour les états interméidaires.
+- très commode pour les états intermédiaires.
 
 ## Inconvénients
 - Un seul point d'entrée dans l'application (naïvement);
