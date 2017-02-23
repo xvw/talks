@@ -2,7 +2,7 @@
 % ![](images/logo.png){width=80px}
 % Raphaël Pallies, Xavier Van de Woestyne \newline \newline LilleFP3
 
-# A supprimer
+# Intro : A supprimer
 
 -  Web et JS (ici on troll React and co, complexité)
 -  Elm : Un langage pour le web (Types, FRP)
@@ -117,3 +117,11 @@ beginnerProgram :
 -  Elm-test ;
 -  Elm-format (un peu extrême) ;
 -  Elm-router, Elm-Lazy etc.
+
+
+# Outro : a supprimer
+
+-  Point forts (+héritage)
+-  Points faibles (modules)
+-  Future (PureScript)
+-  Conclusion
