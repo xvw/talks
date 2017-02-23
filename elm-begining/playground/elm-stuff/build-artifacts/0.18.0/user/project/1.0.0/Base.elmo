@@ -1,0 +1,140 @@
+var _user$project$Base$showTalks = function (_p0) {
+	var _p1 = _p0;
+	return A2(
+		_elm_lang$html$Html$li,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_p1._0,
+					A2(_elm_lang$core$Basics_ops['++'], ' par ', _p1._1))),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Base$update = F2(
+	function (msg, model) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'SetTalk':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{talk: _p2._0});
+			case 'SetSpeaker':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{speaker: _p2._0});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						talks: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: model.talk, _1: model.speaker},
+							_1: model.talks
+						}
+					});
+		}
+	});
+var _user$project$Base$Model = F3(
+	function (a, b, c) {
+		return {talk: a, speaker: b, talks: c};
+	});
+var _user$project$Base$SaveTalk = {ctor: 'SaveTalk'};
+var _user$project$Base$SetSpeaker = function (a) {
+	return {ctor: 'SetSpeaker', _0: a};
+};
+var _user$project$Base$SetTalk = function (a) {
+	return {ctor: 'SetTalk', _0: a};
+};
+var _user$project$Base$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$p,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Talk'),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onInput(_user$project$Base$SetTalk),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$value(model.talk),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Speaker'),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onInput(_user$project$Base$SetSpeaker),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value(model.speaker),
+										_1: {ctor: '[]'}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$Base$SaveTalk),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Save Talk'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$ul,
+							{ctor: '[]'},
+							A2(_elm_lang$core$List$map, _user$project$Base$showTalks, model.talks)),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Base$main = _elm_lang$html$Html$beginnerProgram(
+	{
+		model: A3(
+			_user$project$Base$Model,
+			'',
+			'',
+			{ctor: '[]'}),
+		update: _user$project$Base$update,
+		view: _user$project$Base$view
+	})();
