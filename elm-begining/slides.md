@@ -1,4 +1,4 @@
-% Introduction à Elm
+% La gentille introduction à Elm
 % ![](images/logo.png){width=80px}
 % Raphaël Pallies, Xavier Van de Woestyne \newline \newline LilleFP3
 
@@ -10,6 +10,59 @@
 -  Elm Architecture
 -  Modules
 
+# Flash, JavaScript, Silverlight (:troll:)
+
+![Puis bon, Flash et Silverlight... ahem](images/evolution.jpeg){width=320px}
+
+---
+
+## Maintenant on veut :
+
+- Des Single-page-app's ;
+- super réactive ;
+- responsives ;
+- sans temps de chargements (fait par le serveur) mais par des *spinners*.
+
+---
+
+![Pleins d'outils](images/js.jpeg)
+
+---
+
+![Sans troll hein](images/react.png)
+
+# Elm in a nutshell
+
+Créé par **Evan Czaplicki** en 2012
+
+- Langage fonctionnel (réactif), statiquement typé et concurrent;
+- qui compile vers JavaScript (comme d'autres) ;
+- des erreurs expressives ;
+- accessible et performant ;
+- utilisé industriellement ;
+- interdisant (au mieux) les erreurs au *Runtime* ;
+- facile à apprendre ;
+- respectant la tradition des langages **ML** (et proche de Haskell).
+
+
+---
+
+![Yep, vraiment ML-inspired !](images/evan.png)
+
+---
+
+> Issu de la recherche mais évoluant grâce à la communauté.
+
+# Typé statiquement
+
+- Types primitifs (liste, nombres, booléens, chaines de caractères etc.) ;
+- polymorphisme paramétrique ;
+- types algébriques ;
+- alias de types.
+
+`direBonjour : String -> String -> Html.text`
+
+`direBonjour : Prenom -> Nom -> Html.text`
 
 
 # Installation
