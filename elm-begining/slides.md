@@ -2,13 +2,6 @@
 % ![](images/logo.png){width=80px}
 % Raphaël Pallies, Xavier Van de Woestyne \newline \newline LilleFP3
 
-# Intro : A supprimer
-
--  Web et JS (ici on troll React and co, complexité)
--  Elm : Un langage pour le web (Types, FRP)
--  Let it be Mainstream
--  Elm Architecture
--  Modules
 
 # Flash, JavaScript, Silverlight (:troll:)
 
@@ -63,6 +56,56 @@ Créé par **Evan Czaplicki** en 2012
 `direBonjour : String -> String -> Html.text`
 
 `direBonjour : Prenom -> Nom -> Html.text`
+
+# Functional Reactive Programming
+
+> En informatique, la programmation réactive est un paradigme de programmation visant à
+> conserver **une cohérence** d'ensemble en **propageant** les modifications d'une source réactive
+> (modification d'une variable, entrée utilisateur, etc.) aux éléments dépendants de
+> cette **source**.
+
+**Wikipedia**
+
+Par *functional*, on entend : "Faire de la programmation réactive avec des combinateurs
+fonctionnels".
+
+## Exemples :
+
+- Dom Virtuel
+- Interaction utilisateur
+
+---
+
+![](images/signals.png)
+
+---
+
+# FRP under the hood
+
+- Signaux ;
+- interface monadique ;
+- *arrow calculus*.
+
+---
+
+![Only for Haskell addicts !](images/lovehaskell.jpeg){width=260px}
+
+---
+
+![](images/letsbe.png)
+
+---
+
+# Byebye signaux explicits, bonjour Elm-architecture
+
+![](images/archi.png)
+
+
+# Unités de compilation : les modules
+
+- Un module est un espace nom ;
+- il intègre une notion d'expostion ;
+- il permet de fragmenter le code.
 
 
 # Installation
@@ -172,9 +215,27 @@ beginnerProgram :
 -  Elm-router, Elm-Lazy etc.
 
 
-# Outro : a supprimer
+# Points forts
 
--  Point forts (+héritage)
--  Points faibles (modules)
--  Future (PureScript)
--  Conclusion
+-  Facile à apprhénder ;
+-  intègre des notions de signalétique discrète ;
+-  un langage à l'écoute de sa communauté ;
+-  Type-safe et élégant !
+
+# Points faibles
+
+-  Elm-architecture non composable :'( ;
+-  peu de bibliothèques (et parfois une documentation rugueuse) ;
+-  absence de polymorphisme add-hoc (ce qui implique de la répétion... parfois) ;
+-  a force de vouloir être "trop *mainstream*", le développeur perd des outils ;
+-  les dates et les timezone :troll: !
+
+# Conclusion
+
+- Elm c'est cool ! Faites en !
+- Observez PureScript ...
+
+
+## Bonus : comment être efficient en Elm ?
+
+## QUESTIONS ? REACTIONS ? AFFIRMATIONS ?
