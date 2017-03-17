@@ -1,0 +1,82 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Ek Mukta', sans-serif;
+    font-weight: 400;
+    height: 100vh;
+    color: #000;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.content {
+    padding: 32px;
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 3.2rem;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+}
+
+li > * {
+    flex: 1;
+    margin: 4px 8px;
+    padding: 4px;
+    text-align: center;
+    border-radius: 3px;
+    font-weight: 800;
+}
+
+.title {
+    flex: 3;
+    text-align: left;
+    font-weight: 400;
+    color: black;
+}
+
+a {
+    color: #FFF;
+}
+
+.at {
+    background-color: #00A388;
+    color: #BEEB9F;
+}
+
+.slides {
+    background-color: #BEEB9F;
+    color: #00A388;
+}
+
+.video {
+    background-color: #FF6138;
+    color: #FFFF9D;
+}
