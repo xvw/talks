@@ -53,6 +53,7 @@ li>* {
     font-weight: 800;
 }
 
+
 .title {
     flex: 3;
     text-align: left;
@@ -80,6 +81,11 @@ a {
 }
 
 @media screen and (max-width: 640px) {
+    h1 {
+        text-align: center;
+        line-height: 2.8rem;
+    }
+
     li {
         flex-direction: column;
         margin-top: 42px;
