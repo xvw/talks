@@ -80,3 +80,24 @@ a {
     background-color: #FF6138;
     color: #FFFF9D;
 }
+
+
+@media screen and (max-width: 640px) {
+    li {
+        flex-direction: column;
+        margin-top: 42px;
+    }
+
+    li > * {
+        order: 2;
+    }
+
+    .date {
+        order: 0;
+    }
+
+    .title {
+        order: 1;
+        text-align: center;
+    }
+}
