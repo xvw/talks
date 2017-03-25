@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 body {
     margin: 0;
     font-family: 'Ek Mukta', sans-serif;
@@ -17,18 +16,18 @@ body {
 a {
     text-decoration: none;
 }
-
+Ò
 .content {
     padding: 32px;
 }
 
-h1, h2 {
+h1,
+h2 {
     margin: 0;
     padding: 0;
 }
 
-h2 {
-}
+h2 {}
 
 h1 {
     font-weight: 800;
@@ -46,7 +45,7 @@ li {
     justify-content: space-between;
 }
 
-li > * {
+li>* {
     flex: 1;
     margin: 4px 8px;
     padding: 4px;
@@ -81,21 +80,17 @@ a {
     color: #FFFF9D;
 }
 
-
 @media screen and (max-width: 640px) {
     li {
         flex-direction: column;
         margin-top: 42px;
     }
-
-    li > * {
+    li>* {
         order: 2;
     }
-
     .date {
         order: 0;
     }
-
     .title {
         order: 1;
         text-align: center;
