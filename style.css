@@ -27,7 +27,6 @@ h2 {
     padding: 0;
 }
 
-
 h1 {
     font-weight: 800;
     font-size: 3.2rem;
@@ -52,7 +51,6 @@ li>* {
     border-radius: 3px;
     font-weight: 800;
 }
-
 
 .title {
     flex: 3;
@@ -85,7 +83,6 @@ a {
         text-align: center;
         line-height: 2.8rem;
     }
-
     li {
         flex-direction: column;
         margin-top: 42px;
