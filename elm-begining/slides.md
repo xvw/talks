@@ -217,7 +217,7 @@ beginnerProgram :
 
 # Points forts
 
--  Facile à apprhénder ;
+-  Facile à appréhender ;
 -  intègre des notions de signalétique discrète ;
 -  un langage à l'écoute de sa communauté ;
 -  Type-safe et élégant !
