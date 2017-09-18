@@ -78,7 +78,7 @@ end = struct
     match zipper.left with
     | [] -> {
         zipper with
-        left = []
+        left = [zipper.default]
       ; right = zipper.default :: zipper.right
       }
     | x :: xs -> {
@@ -91,7 +91,7 @@ end = struct
     match zipper.right with
     | [] -> {
         zipper with
-        right = []
+        right = [zipper.default]
       ; left = zipper.default :: zipper.left
       }
     | x :: xs -> {
@@ -107,8 +107,11 @@ end = struct
     | x :: _ -> x
 
   let change zipper value =
-    { zipper with left = value :: zipper.left}
-               
+    let new_value = match zipper.left with
+      | [] -> [value]
+      | _ :: xs ->  value :: xs
+    in { zipper with left = new_value }
+     
 
 end
 
@@ -118,9 +121,8 @@ let run str  =
   let tokens = Parser.of_string str in
   let zipper = Zipper.create 0 in
   let rec aux zipper brainfuck =
-    print_int (Zipper.current zipper);
     match brainfuck with
-    | [] -> ()
+    | [] -> zipper
     | Parser.Plus :: xs ->
        let value = Zipper.current zipper in
        aux (Zipper.change zipper (value + 1)) xs
@@ -140,6 +142,12 @@ let run str  =
     | Parser.Input :: xs ->
        aux zipper xs
     | (Parser.Loop loop) :: xs ->
+       let _ = Printf.printf "%d\n" (Zipper.current zipper) in
        if (Zipper.current zipper) = 0 then aux zipper xs
-       else aux zipper loop; aux zipper brainfuck
+       else
+         let new_zipper = aux zipper loop
+         in aux new_zipper brainfuck
+          
   in aux zipper tokens
+
+let _ = run "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>."
