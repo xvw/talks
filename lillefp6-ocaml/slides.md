@@ -458,6 +458,7 @@ Je suis un Hello World en Brainfuck !
 -  Un système de type ... génial
 -  Des contributeurs sérieux
 -  Une modernité qui vient via Facebook et Bloomberg
+-  Beaucoup de ressources (livres, didacticiels, vidéos)
 
 bref, OCaml est un langage qui a de l'avenir, en tant qu'inspiration, en tout cas, et vous 
 devriez vous y intéresser ! 
