@@ -24,7 +24,7 @@ end = struct
     | Loop of token list
 
 
-  let string_of_list str =
+  let list_of_string str =
     let len = String.length str in
     let rec aux acc i =
       if i = -1 then acc 
@@ -46,7 +46,7 @@ end = struct
          let (rest, loop) = aux [] xs in
          aux ((Loop loop) :: acc) rest
       | _ :: xs -> aux acc xs
-    in snd (aux [] (string_of_list str))
+    in snd (aux [] (list_of_string str))
 
 end
 
