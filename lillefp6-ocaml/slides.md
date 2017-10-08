@@ -351,6 +351,7 @@ type ('a, 'b) either =
 ## Utilisation de la correspondance de motifs pour déconstruire des variants
 ```ocaml
 let map f opt = 
+match opt with
 | Some x -> Some (f x) 
 | None -> None
 ```
