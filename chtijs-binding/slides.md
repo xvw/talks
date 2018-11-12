@@ -3,8 +3,7 @@
 
 - **xvw** sur Github
 - **vdwxv** sur Twitter, **xvw@sunbeam.city** sur Mastodon
-- **Margo Bank**, construction d'une banque *from scratch*,
-    (On recrute des développeurs *Front-end*)
+- **Margo Bank**
 - **Phutur** : *Useless software with useful languages*
 - **LilleFP** : on recherche des speakers
 
@@ -530,5 +529,12 @@ end
 - Elle essayer de respecter au maximum la **sémantique** de OCaml
 - Obligation de délayer la fragmentation en modules
 - Malgré le dynamisme de JavaScript, OCaml s'en tire pas trop mal
+
+### Travaux futur 
+
+- Encoder les effets de l'application dans des monades libres
+- Encoder la mutabilité "yolo" de JavaScript dans une monade JavaScript
+- Documenter et construire des exemples
+- Faire des MR sur JSOO
 
 # Fin, questions ? Remarques ? 
