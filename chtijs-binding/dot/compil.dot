@@ -1,0 +1,14 @@
+digraph G {
+        rankdir="LR"
+        A[label="main.ml", shape=record]
+        B[label="ocamlc", shape=box3d]
+        C[label="main.byte" shape=note]
+        D[label="js_of_ocaml" shape=box3d]
+        E[label="env1.js" shape=note]
+        F[label="env2.js" shape=note]
+        G[label="main.js" shape=note]
+        H[label="Dead code elimination" shape=none]
+        A -> B -> C -> D -> G
+        E -> H -> D
+        F -> H
+}

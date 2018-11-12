@@ -1,0 +1,14 @@
+digraph g {
+        rankdir="LR";
+        A[label="Implem", shape=note]
+        C[label="Foncteur", shape=box3d];
+        R[shape="record" label="{ <a> Api | <b> Main | <c> Render }"]
+        A -> C;
+        C -> R;
+        M[label="main.ml", shape=note];
+        N[label="render.ml", shape=note];
+        R:a -> M;
+        R:a -> N;
+        R:b -> M;
+        R:c -> N;
+}
