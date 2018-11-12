@@ -30,7 +30,7 @@
 - Pourquoi **Electron**, pourquoi **OCaml**
 - Un bon *binding* 
 - **Js\_of\_OCaml** très rapidement
-- Exemples de liaison simples
+- Exemples de liaisons simples
 - Problématiques liées au **typage** (la fonction **on**)
 - Problématiques liées au **design** (la communication inter-processus, remote), peu de code
 
@@ -55,7 +55,7 @@
 ### Les plus 
 - Très bien documenté
 - Très facile à prendre en main 
-- Très facile de faire du multi-platforme
+- Très facile de faire du multi-plateforme
 - Beaucoup de paquets (NodeJS oblige)
 
 ### Les moins
@@ -74,7 +74,7 @@
 ### Really ?
 
 - Langage fonctionnel et impératif moderne (avec un modèle Objet riche)
-- Système de types très évolué (Types algébriques, modules)
+- Système de types très évolué (types algébriques, modules)
 - Compile (**Js\_Of\_OCaml**), ou transpile (**BuckleScript**) vers JavaScript 
 - Et puis j'aime bien !
 
@@ -82,7 +82,7 @@
 
 ## Ingrédients
 
-- Couvrir les fonctionnalités majeurs de la source
+- Couvrir les fonctionnalités majeures de la source
 - Respecter la sémantique du langage cible (au niveau des valeurs)
 - Respecter la sémantique du langage cible (au niveau de la structure)
 
@@ -95,9 +95,9 @@
 
 ## JSOO
 
-- Un **Compilateur** qui convertit le bytecode OCaml en JavaScript
+- Un **compilateur** qui convertit le bytecode OCaml en JavaScript
 - Avec **une extension de syntaxe** pour distinguer la partie OCaml de la partie JavaScript
-- La bibliothèques expose (presque) le runtime JS
+- La bibliothèque expose (presque) le runtime JS
 - Des outils pour accéder au scope global (et à des bibliothèques externes)
 
 ## Compilation
@@ -170,7 +170,7 @@ end
 ## C'est très verbeux
 
 - Pour faire vivre OCaml et JavaScript, JSOO impose des constructions 
-  verbeuses (mais nécéssaire)
+  verbeuses (mais nécéssaires)
 - C'est aussi compliqué à lire
 - **On voudrait cacher le *boilerplate* à l'utilisateur de notre**
   **bibliothèque**
@@ -193,7 +193,7 @@ end
 - **OCamlectron.Plumbing** : *Binding low-level* 
 - **OCamlectron.Main** : Expose les objets du *main process* 
 - **OCamlectron.Render** : Expose les objets des *render processes*
-- **OCamlectron.Api** : Api de manipulation des objets *main* et *render*
+- **OCamlectron.Api** : API de manipulation des objets *main* et *render*
 
 **Api** permet de manipuler dans tous les processus, 
 les objets de tous les processus. (**Obligatoire à cause du Remote**).
@@ -223,10 +223,10 @@ let () = Window.alert "Mon alerte"
 
 ## `get_path_of`
 
-- `application.getPath(path)` : Renvoie le chemin d'un dossier "connu" de l'OS
+- `application.getPath(path)` : renvoie le chemin d'un dossier "connu" de l'OS
 - **L'ensemble des valeurs valides de `path` est connu**
 
-## On décrit l'ensemble des chemins requêtable
+## On décrit l'ensemble des chemins requêtables
 
 ```ocaml
 type path_name = 
@@ -277,7 +277,7 @@ let get_path_of app path_name =
   Js.to_string value
 ```
 
-### A utiliser 
+### À utiliser 
 
 ```ocaml
 let home = App.get_path_of my_app Home
@@ -292,7 +292,7 @@ let home = App.get_path_of my_app Home
 - Pleins de champs optionnels
 - Certains champs entretiennent une **interdépendance**
 
-## On défini le type des paramètres 
+## On définit le type des paramètres 
 
 ```ocaml
 class type options = object
@@ -312,6 +312,7 @@ class type options = object
   method tabbingIdentifier : js_string t Optdef.t readonly_prop
 end
 ```
+
 ## On les projette dans un record 
 
 ```ocaml
@@ -373,10 +374,10 @@ let options = object%js
   end in new%js constr options
 ```
 
-## A l'usage 
+## À l'usage 
 
 - Utilisation d'arguments nommés 
-- Utilisation de couples pour l'interdépendances
+- Utilisation de couples pour l'interdépendance
 
 ```ocaml
 let window = 
@@ -414,7 +415,7 @@ val on : target -> string -> ??? -> unit
 
 ## Utilisation de GADTs
 
-> Un **Tye algébrique généralisé** est, entre autre, une collection 
+> Un **tye algébrique généralisé** est, entre autres, une collection 
 > de variants indexés par des types : 
 
 ```ocaml
@@ -462,7 +463,7 @@ val on : target -> ('a -> 'b) event -> ('a -> 'b) -> unit
 ```
 - On connecte le type de l'événement avec le type du callback
 - On joue sur le fait que `a -> b -> c` = `(a -> b)-> c`
-- Ça peut impliquer quelques règles de typage un peu complexe : 
+- Ça peut impliquer quelques règles de typage un peu complexes : 
 
 ```ocaml
 let ev_to_string : type a. a event -> Js.js_string Js.t = function 
@@ -483,6 +484,7 @@ let ev_to_string : type a. a event -> Js.js_string Js.t = function
 - Evénements définis par l'utilisateur de la bibliothèque
 
 ### Remote
+
 - Proxy du *main* dans le *render*
 - Expose toute les fonctions exportées dans *main*
 
@@ -526,14 +528,14 @@ end
 ## 
 
 - **OCamlectron** est une bibliothèque qui **produit** trois bibliothèques
-- Elle essayer de respecter au maximum la **sémantique** de OCaml
+- Elle essaye de respecter au maximum la **sémantique** de OCaml
 - Obligation de délayer la fragmentation en modules
 - Malgré le dynamisme de JavaScript, OCaml s'en tire pas trop mal
 
-### Travaux futur 
+### Travaux futurs
 
 - Encoder les effets de l'application dans des monades libres
-- Encoder la mutabilité "yolo" de JavaScript dans une monade JavaScript
+- Encoder la mutabilité *YOLO* de JavaScript dans une monade JavaScript
 - Documenter et construire des exemples
 - Faire des MR sur JSOO
 
