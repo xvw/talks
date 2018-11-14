@@ -19,6 +19,7 @@
 - Comprendre "ce qu'est un bon *binding*" à mon sens 
 - Comprendre des problématiques liés au typage
   (parce que c'est à la mode, **TypeScript**, **Flow**, **HaXe**)
+- Présenter des *tricks*... relativement évidents...
 
 ### Hors périmètre 
 - Apprendre OCaml ou à écrire des *bindings* OCaml
