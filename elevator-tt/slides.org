@@ -1,0 +1,85 @@
+#+TITLE: The elevator problem
+#+SUBTITLE: /A brief contextualized introduction to *finite state machines*/
+#+DATE: *Touraine Tech 2019*
+#+AUTHOR: Xavier Van de Woestyne
+#+EMAIL: xaviervdw@gmail.com
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+options: H:2
+
+* Hello !
+
+- Xavier Van de Woestyne (Bruxelles, Lille, Paris) ;
+- /Data Engineer/ chez *margo.com*
+- J'aime bien programmer (OCaml, F#, Haskell, Erlang/Elixir, Kotlin, Io, Elm) ;
+- https://xvw.github.io, *xvw* sur Gitlab et Github ;
+- *twitter.com/vdwxv* et *xvw@merveilles.town* ;
+- *Phutur* : /useless software with useful languages/ ;
+- *LilleFP* : /Meetup/ approximativement bimestriel ;
+- j'ai une "technique" de préparation de présentation assez particulière :
+  - j'essaie de découvrir quelque chose ;
+  - j'essaie de faire la promotion de quelque chose ;
+  - je fantasme sur une "/perle/" ;
+  - *je râle sur quelque chose.*
+
+* Objectifs de la présentation
+
+- Raisonner la notion de *programme à états* (/stateful/) ;
+- présenter un exemple *concret* de programme à états (les ascenseurs) ;
+- proposer des perspectives d'implémentation *commodes* ;
+- voir les *forces* et les *faiblesses* des machines à états ;
+- raisonner *l'expérience utilisateur* ;
+- utilisation de langages moins /mainstreams/.
+
+* Mise en contexte
+
+*Une vraie histoire !*
+
+#+BEGIN_QUOTE
+Dans un espace de /co-working/ parisien, il y a *un* ascenseur ...
+#+END_QUOTE
+
+- Un ascenseur pour *8 étages* ;
+- pouvant accueillir ~6 personnes ;
+- avec *un seul* bouton d'appel ;
+- tombant souvent en **panne**.
+
+
+* Mise en contexte : *un seul* bouton d'appel
+
+Pouvant rendre le trajet *très frustrant*. Par exemple : 
++ si l'ascenseur est à l'étage 5, et qu'il se rend à l'étage 7 ;
++ que j'appelle l'ascenseur à l'étage 6, pour descendre à l'étage 4 ;
++ l'ascenseur s'arrêtera à l'étage 6, puis continuera vers l'étage 7 ;
++ a cause d'un soucis, l'ascenseur s'arrêtera *toujours* à l'étage 6 ;
++ pour ensuite descendre à l'étage 4 ... 
+
+* Mise en contexte : *un seul* bouton d'appel
+
+#+NAME: fig:SAMPLE1
+#+ATTR_LATEX: width=\textwidth
+[[./fig/a.svg]]
+
+#+NAME: fig:SAMPLE1
+#+ATTR_LATEX: width=\textwidth
+[[./fig/b.svg]]
+
+** Optimisation du trajet
+
+L'absence de deux boutons (monter/descendre) rend l'optimisation du 
+trajet impossible.
+
+* Autre aléa (assez amusant)
+
+** Avant la maintenance *N* dûe à une *Nème* panne
+
+- Si j'appuie *N* fois sur le bouton d'appel, en attendant l'ascenseur ;
+- arrivé à mon étage, il ouvrira/fermera ses portes *N* fois...
+- a l'époque je m'étais arrêté à 13.
+
+* Autre aléa (assez amusant)
+
+#+CAPTION: Stack ftw
+#+ATTR_LATEX: width=\textwidth
+#+NAME: fig:SAMPLE1
+[[./fig/c.svg]]

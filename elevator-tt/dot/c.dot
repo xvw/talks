@@ -1,0 +1,16 @@
+digraph G {
+        size="4,2"
+        ratio="compress";
+        bgcolor="#ffffff00"
+
+        node[shape=record];
+        A[label="Appel à l'étage 6", shape=plain];
+        AA[shape=insulator, label=""]
+        B[label="{Etape(étage 6)}"];
+        C[label="{Etape(étage 6) | Etape(étage 6)}"];
+        D[label="{Etape(étage 6) | Etape(étage 6) | Etape(étage 6)}"];
+        A -> AA [penwidth = 1];
+        AA -> B [penwidth = 1];
+        AA -> C [penwidth = 1];
+        AA -> D [penwidth = 1];
+}

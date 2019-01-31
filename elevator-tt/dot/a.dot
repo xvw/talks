@@ -1,0 +1,13 @@
+digraph G {
+        rankdir="LR";
+        ratio="compress";
+        bgcolor="#ffffff00";
+        A[label="4ème étage" shape=box];
+        B[label="5ème étage" shape=box];
+        C[label="6ème étage" shape=box];
+        D[label="7ème étage" shape=box];
+        E[label="6ème étage" shape=box];
+
+        B -> C -> D -> E -> A;
+}
+
