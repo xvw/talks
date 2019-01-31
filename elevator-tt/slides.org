@@ -1,5 +1,5 @@
 #+TITLE: The elevator problem
-#+SUBTITLE: /A brief contextualized introduction to *finite state machines*/
+#+SUBTITLE: /A brief contextualized introduction to *finite state machines* \linebreak and some *data structures*/
 #+DATE: *Touraine Tech 2019*
 #+AUTHOR: Xavier Van de Woestyne
 #+EMAIL: xaviervdw@gmail.com
@@ -15,7 +15,7 @@
 - https://xvw.github.io, *xvw* sur Gitlab et Github ;
 - *twitter.com/vdwxv* et *xvw@merveilles.town* ;
 - *Phutur* : /useless software with useful languages/ ;
-- *LilleFP* : /Meetup/ approximativement bimestriel ;
+- *LilleFP* : /Meetup/ approximativement bimestriel ;\linebreak
 - j'ai une "technique" de préparation de présentation assez particulière :
   - j'essaie de découvrir quelque chose ;
   - j'essaie de faire la promotion de quelque chose ;
@@ -28,8 +28,15 @@
 - présenter un exemple *concret* de programme à états (les ascenseurs) ;
 - proposer des perspectives d'implémentation *commodes* ;
 - voir les *forces* et les *faiblesses* des machines à états ;
-- raisonner *l'expérience utilisateur* ;
-- utilisation de langages moins /mainstreams/.
+- raisonner (un peu) *l'expérience utilisateur* ;
+- utilisation de langages moins /mainstreams/ ;
+- fantasmer l'implémentation "potentielle" d'ascenseurs... 
+  (en utilisant des langages inadaptés à l'implémentation 
+  réelle d'un ascenseur) \linebreak
+
+** Hors périmètre 
+- Implémentation "réelle" de l'ascenseur ;
+- focus sur l'implémentation logique.
 
 * Mise en contexte
 
@@ -80,6 +87,24 @@ trajet impossible.
 * Autre aléa (assez amusant)
 
 #+CAPTION: Stack ftw
-#+ATTR_LATEX: width=\textwidth
-#+NAME: fig:SAMPLE1
 [[./fig/c.svg]]
+
+** Voici le "pourquoi" de cette présentation
+A chaque fois que j'ai dû attendre cet ascenseur... j'y pensais.
+
+* Un problèmes sur plusieurs fronts
+
+** L'arbitrage
+
+- Décider quelles stratégies adopter (attente longue ou trajet long ?) ;
+- quand "rouvrir" la porte ?
+- Intersection intelligente entre "la prise de décision automatique" et 
+  le "raisonnement simple". (Par exemple, comment se comporter vis à vis 
+  du poids maximum supporté par un ascenseur ?)
+
+** L'implémentation
+
+- Modèlisation plus complexe qu'il n'y parait ;
+- choix de structures de données adéquates ;
+- *rendre les états impossibles... impossibles* ;
+- *scalabilité* : comment augmenter le nombre d'ascenseurs ?
