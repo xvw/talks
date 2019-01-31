@@ -19,7 +19,7 @@
 - j'ai une "technique" de préparation de présentation assez particulière :
   - j'essaie de découvrir quelque chose ;
   - j'essaie de faire la promotion de quelque chose ;
-  - je fantasme sur une "/perle/" ;
+  - *je fantasme sur une "/perle/"* ;
   - *je râle sur quelque chose.*
 
 * Objectifs de la présentation
@@ -27,9 +27,9 @@
 - Raisonner la notion de *programme à états* (/stateful/) ;
 - présenter un exemple *concret* de programme à états (les ascenseurs) ;
 - proposer des perspectives d'implémentation *commodes* ;
-- voir les *forces* et les *faiblesses* des machines à états ;
+- voir les *forces* et les *faiblesses* des machines à états par opposition aux "objets" classiques ;
 - raisonner (un peu) *l'expérience utilisateur* ;
-- utilisation de langages moins /mainstreams/ ;
+- utilisation de langages moins /mainstreams/ (et statiquement typés) ;
 - fantasmer l'implémentation "potentielle" d'ascenseurs... 
   (en utilisant des langages inadaptés à l'implémentation 
   réelle d'un ascenseur) \linebreak
@@ -37,6 +37,15 @@
 ** Hors périmètre 
 - Implémentation "réelle" de l'ascenseur ;
 - focus sur l'implémentation logique.
+
+* /Caveat emptor/ ! 
+
+- L'objectif de la présentation est de tâcher d'être *pédagogique* ;
+- c'est une présentation très *idéologique* (et subjective) ;
+- le *raisonnement* sera donc privilégié à la présentation de code ;
+- ce serait sûrement très bête d'implémenter un ascenseur de cette 
+  manière...
+- 40 minutes... c'est très court ^^' (+10 de questions réponses).
 
 * Mise en contexte
 
@@ -108,3 +117,47 @@ A chaque fois que j'ai dû attendre cet ascenseur... j'y pensais.
 - choix de structures de données adéquates ;
 - *rendre les états impossibles... impossibles* ;
 - *scalabilité* : comment augmenter le nombre d'ascenseurs ?
+ 
+* Raisonnement sur un programme "à états"
+
+- Un programme qui "/se souvient/" des événements précédents ;
+- et qui peut effectuer un transition vers un autre état en se basant sur 
+  son état courant.\linebreak
+  
+** Une collection d'ascenseurs est régie par une collection de règles et d'états
+
+- Que se passe-t-il quand on appelle un ascenseur ? 
+- Peut-on ouvrir des portes qui sont déjà ouvertes ? 
+- Peut-on fermer des portes qui sont déjà fermées ? 
+- A quel étage se trouvent les ascenseurs ? 
+
+
+* Modèlisation naïve : les états implicites
+
+- Ne pas être explicite sur les états ; 
+- qui deviennent définis par des environnements (des variables mutables) ;
+- ce qui rend le programme *dur à raisonner*, notamment sur *l'intégrité* des 
+  transitions ;
+- impose (trop) souvent des *assertions à l'exécution*.\linebreak
+
+** On devrait rendre les états explicites !
+
+- Définitions "formelles de états" ;
+- rendre les transitions *explicites* ;
+- rendre les états impossibles... impossible.
+
+
+* Machines à états finis
+
+* Support natif dans certains langages
+
+* Implémentation dans un langage avec un système de types riche
+
+* Structures algébriques et structures de données relatives à l'implémentation
+
+* Heuristiques
+
+* Résumé
+
+* Conclusions
+
