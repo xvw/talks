@@ -149,15 +149,302 @@ A chaque fois que j'ai dû attendre cet ascenseur... j'y pensais.
 
 * Machines à états finis
 
+- Modèlisation d'un programme comme une machine /abstraite/ ;
+- propose un ensemble d'états *fini* ;
+- ne peut être que dans un seul état à la fois ;
+- des *évènements* peuvent déclencher une transition d'état ;
+- pour chaque état, il existe une suite légale de transitions ;
+- ces transitions sont exprimées comme une association entre des évènements
+  /à d'autres états/.
+
+* Machines à états finis
+
+*Erlang* décrit les machines à états finis comme un ensemble de relations 
+de cette forme :
+
+** 
+$State(S) * Event(E) -> Action(A), State(S')$
+
+** telle que 
+
+Si l'on est dans l'état *S* et que l'évènement *E* se produit, 
+on peut executer l'action *A* et faire une transition vers l'état *S'*.
+
+* Machines à états finis (par exemple)
+
+#+NAME: fig:SAMPLE1
+#+CAPTION: Une porte représentée comme une machine à états finis
+[[./fig/d.svg]]
+
+ 
+
+** Autres exemples
+
+- Certains fragments de manipulation d'expressions régulières ;
+- la *Elm-Architecture* (ou *Redux*) ;
+
+
 * Support natif dans certains langages
+
+** Langages
+- *Erlang* et *Elixir* (via =gen_fsm=)
+- *SCADE* (de Esterel)
+- *Mbeddr C* 
+- *Pure Data* (et autres MSP Like)
+
+** Descriptions de FSM
+Grafcet, SMC, CHSM
+
+** 
+Nouvelle vie avec les éditeurs de jeux vidéo.
+
+* Pro/cons des machines à états finis
+
+** Avantages
+- Elles décrivent *formellement* le cycle de vie d'applications :
+  - utile pour la documentation (et pour les autres développeurs) ;
+  - ça facilite la collaboration avec le "métier" ;
+- L'ensemble des états et des transitions sont facilement testables 
+  (par exemple, avec du *PBT*).
+
+** Inconvénients
+- Peu imposer du /boilerplate/ à la définition ;
+- dur à implémenter dans certains langages (récursion terminale VS open recursion).
 
 * Implémentation dans un langage avec un système de types riche
 
+#+NAME: fig:SAMPLE1
+#+CAPTION: très proche des portes 
+[[./fig/e.svg]]
+
+** 
+Avec interdiction d'utiliser =tick= quand on est en pause, et =sleep= quand 
+on est en court.
+
+* Utilisation de OCaml 
+
+- Langage issu de la recherche française ; 
+- beaucoup d'utilisateurs industriels (et de /success stories/) ;
+- un langage très expressif (multi-paradigme) ;
+- facile à prendre en main ;
+- inspiration de beaucoup de /nouveaux langages/ ;
+- avec un système de types algébriques.
+
+* 
+
+** Types produits 
+#+BEGIN_SRC ocaml
+(int, float) {x : int; y: int, name: string}
+#+END_SRC
+** Types sommes 
+
+#+BEGIN_SRC ocaml
+type gender = 
+  | Male 
+  | Female 
+  | Other of string
+
+type 'a option = 
+  | Some of 'a
+  | None
+#+END_SRC
+
+** Types exponentiels
+#+BEGIN_SRC ocaml
+(int -> int -> int) (float -> int) ('a -> 'a)
+#+END_SRC
+
+* 
+
+#+BEGIN_SRC ocaml
+let hello = function 
+  | Male -> "Bonjour monsieur" 
+  | Female -> "Bonjour madame"
+#+END_SRC
+
+** 
+
+*Warning 8*: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+=Other _=
+
+* 
+
+#+BEGIN_SRC ocaml
+let hello = function 
+  | Male -> "Bonjour monsieur" 
+  | Female -> "Bonjour madame"
+  | Other s -> Bonjour " ^ s
+#+END_SRC
+
+** 
+
+*Warning 8*: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+=Other _=
+
+
+* Variants polymorphes et types algébriques généralisés (GADT)
+
+#+BEGIN_SRC ocaml
+(* Variants polymorphes *)
+`Foo; `Bar of int; [`Foo | `Bar of int]
+
+(* GADT *)
+type _ t = 
+  | A : int t 
+  | B : float t 
+  | C : 'a -> 'a t
+
+let f = function 
+  | A -> "valeur A" 
+#+END_SRC
+
+* Implémentation de la machine 
+
+#+BEGIN_SRC ocaml
+type time = int 
+type _ state = 
+ | Running : time -> [`Running] state 
+ | Paused : time -> [`Paused] state 
+
+let start () = Running 0
+
+let resume (Paused x) = Running x 
+let pause (Running x) = Paused x
+
+let tick (Running x) = Running (x + 1) 
+let sleep time (Paused x) = Paused (time + x)
+#+END_SRC
+
+* 
+
+#+BEGIN_SRC ocaml
+start () 
+  |> tick 
+  |> pause 
+  |> resume 
+  |> tick
+#+END_SRC
+** 
+=[ `Running ] state = Running 2=
+
+* 
+
+#+BEGIN_SRC ocaml
+start () 
+  |> tick 
+  |> pause 
+  |> sleep 10 
+  |> resume 
+  |> tick
+#+END_SRC
+
+** 
+=[ `Running ] state = Running 12=
+
+
+* 
+
+#+BEGIN_SRC ocaml
+start () 
+  |> sleep 10;;
+#+END_SRC
+
+** 
+
+*Error*: This expression has type =[ `Paused ] state -> [ `Paused ] state=
+but an expression was expected of type =[ `Running ] state -> 'a=
+These two variant types have no intersection
+
+** Objectif réussi ! 
+
+/Render impossibles les états impossibles/ !
+
+* Types récursifs et composition
+
+Les types en OCaml peuvent être récursifs :
+
+
+#+BEGIN_SRC ocaml
+type 'a list = 
+  | [] 
+  | ( :: ) ('a, 'a list)
+#+END_SRC
+
+On peut donc *composer* des fragments de machines à états et construire des 
+scénarios bien plus complexes. (Par exemple, des états d'ascenseurs).
+
 * Structures algébriques et structures de données relatives à l'implémentation
 
-* Heuristiques
+** Persister un état dans un style fonctionnel 
 
-* Résumé
+Il est nécéssaire de persister l'état des ascenseurs dans la machine :
 
-* Conclusions
+- Relayer l'état de chaque ascenseurs dans l'état du /cluster/ ;
+- utilisation d'une *monade d'état* (à la Haskell).
 
+** Collection et piles
+
+Par exemple, pour structurer la liste des étapes de l'ascenseur (étage 1 -> 2 etc.)
+
+- Liste chainée ;
+- Zipper.
+
+
+* Heuristiques 
+
+Comment définir quel ascenseur, plutôt qu'un autre, doit venir. C'est un sujet
+de recherche encore assez actif, cependant, comme les ascenseurs ne se 
+déplacent pas encore sur deux axes on peut facilement poser les variables 
+pour définir un *score* :\linebreak
+
+** 
+- Le nombre d'étapes nécéssaire pour se rendre au lieu d'appel ;
+- la probabilité d'interruption.
+
+* Aller plus loin, extension du système 
+
+Actuellement, l'ajout d'étape et de transition implique la modification 
+de la bibliothèque initiale : *The expresion problem* :\linebreak
+
+** 
+The expression problem is a new name for an old problem.\linebreak
+The goal is to define a datatype by cases, where one can add new 
+cases to the datatype and new functions over the datatype, without 
+recompiling existing code, and while retaining static type safety 
+(e.g., no casts).
+
+** Propositions
+
+- GADT + =open types=, mais perte de sûreté ;
+- approche *Tagless final*.
+
+
+* Et dans la vraie vie ? 
+
+(où un langage fonctionnel serait adapté :) )
+
+- Les machines à états finis décrivent des problèmes récurrents ;
+- elles permettent une *séparation systématique* entre les états et les actions ;
+- dans un langage avec un système de type riche elles amènent certaines 
+  garanties ;
+- elles s'adaptent à plusieurs problèmes, le jeu vidéo, le web, les systèmes 
+  distribués, l'embarqué ;
+
+** 
+Elles peuvent amener une question d'arbitrage entre *le coût de mise en place* 
+et *le coût d'usage*. Dans un langage ML, ce serait dommage de s'en priver.
+
+* Aller plus loin avec les types 
+
+- Composer avec les combinateurs fonctionnels usuels (implique l'utilisation 
+  d'une *monade indexée*) ;
+- des machines à états basées sur des *types dépendants* (Idris).\linebreak
+
+** 
+Conclusion sur les systèmes de types
+
+* Fin
+
+*Merci !* (On recherche toujours des speakers pour *LilleFP*)

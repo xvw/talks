@@ -1,0 +1,12 @@
+digraph G {
+        ratio="compress";
+        bgcolor="#ffffff00";
+        rankdir="LR";
+        
+        A[label="Porte Ouverte"];
+        B[label="Porte fermée"];
+        A -> B [label="Fermeture"];
+        B -> A [label="Ouverture"];
+        B -> B [label="Sonnerie"];
+}
+

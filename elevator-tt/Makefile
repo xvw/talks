@@ -1,6 +1,6 @@
 all: slides
 
-slides: a.svg b.svg c.svg
+slides: a.svg b.svg c.svg d.svg e.svg
 	pandoc -o slides.pdf -t beamer slides.org \
 	  --pdf-engine=xelatex \
 	  -st beamer --variable classoption="aspectratio=169" \
