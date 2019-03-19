@@ -1,0 +1,45 @@
+#+TITLE: The elevator problem
+#+SUBTITLE: /A brief contextualized introduction to *finite state machines* \linebreak in a *type-safe* context/
+#+DATE: @@latex:{\color{BlueB}@@BreizhCamp 9 - 2019@@latex:}@@
+#+AUTHOR: Xavier Van de Woestyne \linebreak ~xaviervdw@gmail.com~ - [[margo.com][margo.com]]
+#+EMAIL: xaviervdw@gmail.com
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_options: [allowframebreaks, aspectratio=169]
+#+LaTeX_HEADER: \usepackage[backend=biber]{biblatex}
+#+LaTeX_HEADER: \bibliography{bibliography.bib}
+#+LaTeX_HEADER: \usefonttheme{serif}
+#+LaTeX_HEADER: \definecolor{BlueA}{HTML}{031A23}
+#+LaTeX_HEADER: \definecolor{BlueB}{HTML}{137A86}
+#+LaTeX_HEADER: \definecolor{BlueC}{HTML}{50A5A6}
+#+LaTeX_HEADER: \definecolor{LightG}{HTML}{c0c0c0}
+#+LaTeX_HEADER: \setbeamercolor{title}{fg=BlueB}
+#+LaTeX_HEADER: \setbeamercolor{frametitle}{fg=BlueB}
+#+LaTeX_HEADER: \setbeamercolor{structure}{fg=BlueB}
+#+LaTeX_HEADER: \setbeamercolor{normal text}{fg=BlueA}
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \setbeamertemplate{itemize items}[circle]
+#+options: H:2
+
+* Bonjour !
+  #+Beamer: \framesubtitle{https://xvw.github.io, @vdwxw, @xvw@merveilles.town }
+
+
+- Belge, vivant à Lille, travaillant à Paris ;
+- /Data Engineer/ chez *Margo Bank* ;
+- J'aime bien programmer \linebreak (OCaml, F#, Haskell, Erlang/Elixir, Kotlin, Io, Elm) ; \linebreak
+- *Phutur* : "/Useless software with useful language/" ; 
+- *LilleFP* : on recherche toujours des /speakers/ ! 
+
+* Objectifs de la présentation
+  #+Beamer: \framesubtitle{A priori, aucun pré-requis, autre que quelques rudiments en programmation, ne sont... requis}
+
+- Raisonner la notion de *programme à états* ;
+- râler sur certains ascenseurs ; 
+- fantasmer sur l'implémentation d'ascenseurs dans des langages indaptés 
+  \linebreak
+  (pour ce /use-case/).
+- présenter *les machines à états* ;
+- en implémenter dans le contexte  d'un langage  *statiquement typé* ;
+- proposer un /crash-course/ expresse sur le typage ;
+- effleurer la *généricité*, et /un truc encore plus typé/ !
