@@ -19,9 +19,11 @@
 #+LaTeX_HEADER: \setbeamercolor{normal text}{fg=BlueA}
 #+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
 #+LaTeX_HEADER: \setbeamertemplate{itemize items}[circle]
+#+LaTeX_HEADER: \let\footnoterule\relax
+#+LaTeX_HEADER: \setbeamercolor{footnote}{fg=BlueB}
 #+options: H:2
 
-* Bonjour !
+** Bonjour !
   #+Beamer: \framesubtitle{https://xvw.github.io, @vdwxw, @xvw@merveilles.town }
 
 
@@ -31,7 +33,7 @@
 - *Phutur* : "/Useless software with useful language/" ; 
 - *LilleFP* : on recherche toujours des /speakers/ ! 
 
-* Objectifs de la présentation
+** Objectifs de la présentation
   #+Beamer: \framesubtitle{A priori, aucun pré-requis, autre que quelques rudiments en programmation, ne sont... requis}
 
 - Raisonner la notion de *programme à états* ;
@@ -45,4 +47,23 @@
 - effleurer la *généricité*, et /un truc encore plus typé/ ! \linebreak
   (Si le temps nous le permet).
 
-* Mise en contexte
+** /Caveat emptor !/
+  #+Beamer: \framesubtitle{Avant-propos, excuses préalables}
+
+- Une présentation *subjective* et un peu idéologique ; \linebreak
+- les langages utilisés sont probablement (surement) parfaitement inadaptés 
+  à ce genre d'exercice en situation réelle ; \linebreak
+- je met toujours trop de texte sur mes diapositives[fn:1]
+
+[fn:1] Mais je n'ai toujours pas trouvé comment mettre des speakers notes 
+       avec Beamer.
+
+
+* *Mise en contexte* @@latex:\\@@ Il était une fois, dans un espace de coworking  à Paris ... @@latex:\\@@ un seul ascenseur idiot pouvant accueillir  @@latex:\\@@ ~6 personnes pour 8 étages
+
+** Mise en context
+
+* *Un problème de /design/ complexe* @@latex:\\@@ Facilement transposable dans nos problématiques de tous les jours
+
+** Des états et de l'arbitrage
+  #+Beamer: \framesubtitle{Il est probable que l'ascenseur de mes rêves soit inutilisable par le reste du monde ...}
