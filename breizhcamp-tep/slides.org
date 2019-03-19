@@ -39,7 +39,10 @@
 - fantasmer sur l'implémentation d'ascenseurs dans des langages indaptés 
   \linebreak
   (pour ce /use-case/).
-- présenter *les machines à états* ;
+- présenter *les machines à états* (finis) ;
 - en implémenter dans le contexte  d'un langage  *statiquement typé* ;
-- proposer un /crash-course/ expresse sur le typage ;
-- effleurer la *généricité*, et /un truc encore plus typé/ !
+- proposer un /crash-course/ expresse sur le typage ; \linebreak
+- effleurer la *généricité*, et /un truc encore plus typé/ ! \linebreak
+  (Si le temps nous le permet).
+
+* Mise en contexte
