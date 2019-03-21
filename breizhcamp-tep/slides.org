@@ -7,6 +7,7 @@
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_options: [allowframebreaks, aspectratio=169]
 #+LaTeX_HEADER: \usepackage[backend=biber]{biblatex}
+#+LaTeX_HEADER: \usepackage{listings}
 #+LaTeX_HEADER: \bibliography{bibliography.bib}
 #+LaTeX_HEADER: \usefonttheme{serif}
 #+LaTeX_HEADER: \definecolor{BlueA}{HTML}{031A23}
@@ -21,6 +22,7 @@
 #+LaTeX_HEADER: \setbeamertemplate{itemize items}[circle]
 #+LaTeX_HEADER: \let\footnoterule\relax
 #+LaTeX_HEADER: \setbeamercolor{footnote}{fg=BlueB}
+
 #+options: H:2
 
 ** Bonjour !
@@ -43,9 +45,7 @@
   (pour ce /use-case/).
 - présenter *les machines à états* (finis) ;
 - en implémenter dans le contexte  d'un langage  *statiquement typé* ;
-- proposer un /crash-course/ expresse sur le typage ; \linebreak
-- effleurer la *généricité*, et /un truc encore plus typé/ ! \linebreak
-  (Si le temps nous le permet).
+- proposer un /crash-course/ expresse sur le typage.
 
 ** /Caveat emptor !/
   #+Beamer: \framesubtitle{Avant-propos, excuses préalables}
@@ -53,6 +53,7 @@
 - Une présentation *subjective* et un peu idéologique ; \linebreak
 - les langages utilisés sont probablement (surement) parfaitement inadaptés 
   à ce genre d'exercice en situation réelle ; \linebreak
+- pas du tout de couverture sur la notion d'effet (le temps est mon ennemi) ;
 - je met toujours trop de texte sur mes diapositives[fn:1]
 
 [fn:1] Mais je n'ai toujours pas trouvé comment mettre des speakers notes 
@@ -61,9 +62,654 @@
 
 * *Mise en contexte* @@latex:\\@@ Il était une fois, dans un espace de coworking  à Paris ... @@latex:\\@@ un seul ascenseur idiot pouvant accueillir  @@latex:\\@@ ~6 personnes pour 8 étages
 
-** Mise en context
+** Le tout, couplé à de très amusants aléas
+
+*** *Un seul bouton d'appel*
+
+- Donc pas d'optimisation des trajets 
+
+*** *Empilement "brute" dans la pile d'appel*
+
+- J'ai réussi à aller jusqu'a 13 !
 
 * *Un problème de /design/ complexe* @@latex:\\@@ Facilement transposable dans nos problématiques de tous les jours
 
 ** Des états et de l'arbitrage
   #+Beamer: \framesubtitle{Il est probable que l'ascenseur de mes rêves soit inutilisable par le reste du monde ...}
+
+*** *Arbitrage*
+
+- Choix de stratégies (attente longue VS trajet long) ;
+- quand peut-on autoriser la réouverture des portes ;
+- intersection entre la prise de décision simple et automatique \linebreak 
+  (comment se comporter vis à vis du poids maximum supporté).
+
+*** *L'implémentation*
+
+- Une modèlisation plus complexe qu'il n'y parait ;
+- Chaque *état* de l'ascenseur possède son propre domaine : \linebreak
+  on aimerait *rendre les états impossibles, impossibles* ;
+- Comment /scaler/ d'un ascenseur à un cluster d'ascenseurs ?
+
+** Un programme à états
+
+- L'ascenseur est en attente ;
+- l'ascenseur est en cours de trajet ;
+- quand est-il possible d'appeler l'ascenseur ;
+- quand est-il possible d'ouvrir les portes ;
+- etc.
+
+* Les *machines à états* @@latex:\\@@ on entre dans le vif du sujet !
+
+** Les machines à états
+
+Elles définissent un ensemble *d'états* et de *transitions* possibles entre 
+les états. 
+
+*Elles peuplent le monde de l'informatique* :
+
+- Pour la définition de protocoles (Sockets, TCP, RAFT etc.) ;
+- pour la structure de programme (Elm-Architecture/Redux).\linebreak
+
+Malgré leur popularité, j'ai[fn:2] vu peu de développeurs s'en servir 
+pour structurer les états de leurs programmes.
+
+[fn:2] Du haut de ma toute petite expérience.
+
+** Première approche : les états implicites
+
+- Ne pas être explicite sur les états du programme ; 
+- on défini ces états par des environnements (variables mutables etc.)
+- ça rend le programme dur à raisonner (sur l'intégrité des transitions par
+  exemple) ; 
+- ça impose trop souvent des *assertions à l'exécutions*.
+
+** Utilisation de machine à états concrètes 
+
+- Modèlisation du programme comme une machine /abstraite/ ; 
+- propose un ensemble d'états (ici, fini) ;
+- ne peut être que dans un seul état à la fois ; 
+- des événements peuvent déclencher une transition d'état ; 
+- pour chaque état il existe une suite légale de transition ; 
+- ces transitions sont exprimées comme une association d'événements à 
+  d'autres états.
+
+** Utilisation de machine à états concrètes 
+
+*Erlang* décrit les machines à états finies comme un ensemble de 
+relation de cette forme : 
+
+$State(S) * Event(E) -> Action(A), State(S')$ \linebreak
+
+Si on est dans l'état *S* et que l'événement *E* se produit, alors on peut 
+exécuter l'action *A* et faire une transition vers l'état *S'*.
+
+** Par exemple 
+
+#+NAME: fig:SAMPLE1
+#+CAPTION: Une porte représentée comme une machine à états finis
+[[./fig/a.svg]]
+
+** Supports natifs
+
+*** Dans des langages : 
+
+- *Erlang* et *Elixir* via =gen_fsm= ;
+- *SCADE* (de Esterel) ;
+- *Mbeddr C* ;
+- *Pure Data* (et autres MSP Like)
+
+*** Comme outil de description 
+
+- Grafcet
+- SMC
+- CHSM
+
+*** Une nouvelle vie dans les jeux-vidéo
+
+** Pro/Cons des machines à états explicites 
+
+*** *Avantages*
+
+- Elles décrivent formellement le cycle de vie d'une application ; 
+- ça apporte de la documentation (pour d'autres développeurs \linebreak ou pour 
+  le "métier") ; 
+- l'ensemble des états et des transitions sont facilement testables ;
+- ça offre un outil de raisonnement accessible.
+
+*** *Inconvénients potentiels*
+
+- Peu imposer du /boilerplate/ à la définition ; 
+- dur à implémenter dans certains langages (récursion terminale VS 
+  /open recursion/).
+
+* Cas pratique : implémentation d'une machine à états finie dans un langage statiquement typé
+
+** Un programme très simple
+
+#+NAME: fig:SAMPLE2
+#+CAPTION: Une machine "discutablement utile".
+[[./fig/b.svg]]
+
+** Utilisation de OCaml
+
+- Langage issu de la recherche française ; 
+- qui, malgré ce que l'on entend, possède des utilisateurs industriels ; 
+- un langage expressif et multi-paradigme ; 
+- très facile à prendre en main ; 
+- qui fait office d'inspiration pour beaucoup d'autres langages ; 
+- avec un système de types riche et expressif.
+
+** Objectifs 
+
+- Construire une machine à états très simple ;
+- découvrir progressivement des fonctionnalités liés aux systèmes de types ;
+- être aider au maximum par le compilateur pour rendre des états impossibles ...
+  impossibles ;
+- comprendre comment les systèmes de types algébriques nous permettent de 
+  modeliser des systèmes ; \linebreak
+- faire une promotion non maquillé du langage OCaml.
+
+** Le système de types de OCaml : Alias et Produits
+
+*Kotlin* : 
+
+#+begin_src kotlin
+typealias Firstname = String 
+typealias Lastname = String 
+typealias Point = Tuple<Int, Int>
+
+data class Named(val firstname: Firstname, val name: Lastname)
+#+end_src
+
+*OCaml* :
+
+#+begin_src ocaml
+type firstname = string 
+type lastname = string 
+type point = (int * int)
+
+type named = {firstname: firstname; name: lastname}
+#+end_src
+
+** Le système de types de OCaml : Sommes
+
+*Kotlin* : 
+
+#+begin_src kotlin
+sealed class Option<out T: Any>
+data class Some<out T: Any>(val value : T) : Option<T>()
+object None : Option<Nothing>()
+#+end_src
+
+*OCaml* :
+
+#+begin_src ocaml
+type 'a option = 
+| Some of 'a 
+| None
+#+end_src
+
+
+** Le système de types de OCaml : Sommes
+
+#+begin_src ocaml
+type gender =
+ | Male 
+ | Female 
+ | Other of string
+
+let m = Female
+#+end_src
+
+#+begin_src ocaml
+val m : gender = Female
+#+end_src
+
+** Le système de types de OCaml : Sommes
+
+#+begin_src ocaml
+type gender =
+ | Male 
+ | Female 
+ | Other of string
+
+let to_string gender = match gender with 
+  | Male -> "male" 
+  | Female -> "female"
+#+end_src
+
+*Warning 8*: this pattern-matching is not exhaustive. \linebreak
+Here is an example of a case that is not matched:
+~Other _~ \linebreak
+
+~val to_string : gender -> string = <fun>~
+
+
+** Le système de types de OCaml : Sommes
+
+*Kotlin* : 
+
+#+begin_src kotlin
+sealed class Option<out T: Any> {
+  abstract fun <A: Any> map(f: (T) -> A) : Option<A>
+}
+data class Some<out T: Any>(val value: T) : Option<T>() {
+  override fun <A: Any> map(f: (T) -> A) : Option<A> = Some(f(value))
+}
+object None : Option<Nothing>() {
+  override fun <A: Any> map(f: (T) -> A) : Option<A> = None
+}
+#+end_src
+
+*OCaml* :
+
+#+begin_src ocaml
+type 'a option = Some of 'a | None
+let map f opt = match opt with Some x -> Some(f x)  | None -> None
+#+end_src
+
+** Séparation des définitions et des consommations 
+
+#+begin_src kotlin
+sealed class Option<out T: Any>
+data class Some<out T: Any>(val value: T) : Option<T>()
+object None : Option<Nothing>()
+
+// Utilisation de smart-cast
+fun <T, A> map(opt: Option<T>, f: (T) -> A) : Option<A> = 
+  when(opt) {
+    is Some -> Some(f(opt.value))
+    is None -> None
+  }
+#+end_src
+
+Cette approche peut tout de même construire des soucis au niveau de la 
+variance.
+
+** Les types algébriques 
+
+- Les sommes et les produits sont des *types alébriques* \linebreak
+  (parce que leur domaine est égal à la somme ou la multiplication des 
+   domaines de leurs membres)
+
+- Couplés avec de la *correspondance de motifs*, et à la récursion, ils 
+  permettent de décrire toutes forme de structures.
+
+** Note sur le langage de module de OCaml 
+
+- Une unité de compilation qui sépare la signature de l'implémentation ;
+- permet de gérer la visibilité des types/fonctions ;
+- permet d'abstraire certains types ;
+- permet beaucoup d'autres choses ... \linebreak
+
+#+begin_src ocaml
+module My_module : sig
+  type name = string 
+  val hello : name -> unit
+end = struct 
+  type name = string 
+  let hello = Format.printf "Hello %s\n"
+end
+#+end_src
+
+
+** Retour à notre machine à états
+
+#+NAME: fig:SAMPLE2
+#+CAPTION: Retour à notre cas d'usage !.
+[[./fig/b.svg]]
+
+*Une première approche* 
+
+#+begin_src ocaml
+type time = int 
+type step = Running of time | Paused of time
+
+let start () = Running 0
+#+end_src
+
+** Et un premier problème : 
+
+#+begin_src ocaml
+type time = int 
+type step = Running of time | Paused of time
+
+let start () = Running 0
+let resume state = match state with 
+ | Paused x -> Resume x 
+
+let pause state = match state with 
+ | Running x -> Paused x 
+#+end_src
+
+Correspondance de motifs non exhaustive et =pause (Paused 10)= provoque
+une erreur à l'exécution !
+
+** Une autre approche 
+
+#+begin_src ocaml
+type time = int 
+type running = Running of time 
+type paused = Paused of time
+
+let start () = Running 0
+let resume (Paused time) = (Running time)
+let pause (Running time) = (Paused time)
+#+end_src
+
+** Seems better 
+
+#+begin_src ocaml
+start () 
+|> pause 
+|> resume 
+|> pause
+#+end_src
+
+#+begin_src ocaml
+let tick (Running x) = Running (x + 1)
+let sleep time (Paused x) = Paused (x + time)
+#+end_src
+
+** 
+
+#+begin_src ocaml
+start ()
+|> tick 
+|> pause 
+|> sleep 10 
+|> resume 
+(** Ok ! *)
+
+start () |> resume
+#+end_src
+
+*Error*: This expression has type =paused * 'a -> running * 'a=
+       but an expression was expected of type =running * time -> 'b=
+       Type =paused= is not compatible with type =running= 
+
+** Ce qui nous donne comme interface générale :
+
+#+begin_src ocaml
+type time = int
+type running = Running of time
+type paused = Paused of time
+
+val start : unit -> running = <fun>
+val resume : paused -> running = <fun>
+val pause : running -> paused = <fun>
+val tick : running -> running = <fun>
+val sleep : time -> paused -> paused = <fun>
+#+end_src
+
+** Comment gérer les fonctions communes entre les états ?
+
+#+begin_src ocaml
+val le_temps_passe : time -> ??? -> ???
+#+end_src
+
+#+begin_src ocaml
+val le_temps_passe_paused : time -> paused -> paused
+val le_temps_passe_running : time -> running -> running
+#+end_src
+
+Ce n'est pas très agréable ...
+
+** En séparant le temps de l'état 
+
+#+begin_src ocaml
+type time = int
+type running = Running
+type paused = Paused
+type 'a state = ('a * time)
+
+val start : unit -> running state = <fun>
+val resume : paused state -> running state = <fun>
+val pause : running state  -> paused state = <fun>
+val tick : running state -> running state = <fun>
+val sleep : time -> paused state -> paused state = <fun>
+#+end_src
+
+#+begin_src ocaml
+val le_temps_passe : time -> 'a state -> 'a state
+#+end_src
+
+** Almost done !
+
+- Bien que très verbeux, et long, on s'approche de l'objectif
+- par contre : =le_temps_passe ("hello", 20)= est un programme valide...
+
+** Les variants polymorphes 
+
+- Des types sommes qui ne doivent pas être déclarés préalablement 
+- qui introduisent une notion de variance : \linebreak
+
+#+begin_src ocaml
+let f x = match x with 
+  | `Foo -> ("foo", 0) 
+  | `Bar x -> ("bar", x) 
+
+val f : [< `Bar of int | `Foo ] -> string * int = <fun>
+
+let f' x = match x with 
+  | `Foo -> ("foo", 0) 
+  | `Bar x -> ("bar", x) 
+  | _ -> ("hmmm", 1)
+
+val f' : [> `Bar of int | `Foo ] -> string * int = <fun>
+#+end_src
+
+** Utilisation de types fantômes 
+
+#+begin_src ocaml
+module My_fsm : sig 
+  type time = int
+  type 'a state
+end = struct 
+  type time = int
+  type 'a state = time
+end
+#+end_src
+
+On abstrait le type *state*
+
+** 
+
+#+begin_src ocaml
+module My_fsm : sig 
+  type time = int
+  type 'a state
+
+  val start : unit -> [`Running] state
+  val resume : [`Paused] state -> [`Running] state
+  val pause : [`Running] state -> [`Paused] state
+  val le_temps_passe : int -> 'a state -> 'a state
+  val to_time : 'a state -> time
+end
+#+end_src
+
+** 
+
+#+begin_src ocaml
+module My_fsm = struct 
+struct 
+  type time = int
+  type 'a state = time  
+
+  let start () = 0 
+  let resume x = x 
+  let pause x = x 
+  let le_temps_passe time  x = x + time 
+  let to_time x = x
+end
+#+end_src
+
+** Avec une approche plus uniforme 
+
+#+begin_src ocaml
+val le_temps_passe : int -> [< (`Running | `Paused) as 'a ] state -> 'a state
+
+module My_fsm = struct 
+struct 
+  type time = int
+  type 'a state = Running of time | Paused of time  
+
+  let start () = Running 0 
+  let resume x = match x with Paused t -> Running t
+  let pause x = match x with Running t -> Paused t
+  let le_temps_passe time x = match x with 
+    | Running x -> Running (x + time)
+    | Paused x -> Paused (x + time)
+end
+#+end_src
+
+** 
+
+=resume= et =pause= ne sont pas exhaustive ... 
+
+#+begin_src ocaml
+
+let resume x = 
+  match x with 
+  | Paused t -> Running t
+  | _ -> assert false 
+
+let pause x = 
+  match x with 
+  | Running t -> Paused t
+  | assert false
+
+#+end_src
+
+Astuce pour la correspondance de motif exhaustive... c'est un peu triste
+
+** Types algébriques généralisés (GADTs) 
+
+Les *GADTs* offrent, entre autres, la possibilité d'indexer chaque 
+constructeurs d'une somme avec un type : 
+
+#+begin_src ocaml
+type _ example = 
+  | Foo : int example 
+  | Bar : float example 
+#+end_src
+
+#+begin_src ocaml
+let x = Bar 
+val x : float example = Bar
+#+end_src
+
+** Ils permettent de rendre exhaustif des correspondances de motifs 
+
+#+begin_src ocaml
+let f x = match x with 
+ | Foo -> "foo"
+
+val f : int example -> string = <fun>
+#+end_src
+
+*Au contraire des types fantômes :* 
+
+- Ne nécéssite pas d'abstraire le type sur lequel on travail ;
+- permet de construire des fonction non-surjectives ;
+- garder des correspondances de motifs exhaustives "sur des fragments de 
+  domaines".
+
+** Implémentation avec des GADTs 
+
+#+begin_src ocaml
+type time = int 
+type _ state = 
+ | Running : time -> [`Running] state 
+ | Paused : time -> [`Paused] state 
+
+let start () = Running 0
+
+let resume (Paused x) = Running x 
+let pause (Running x) = Paused x
+
+let tick (Running x) = Running (x + 1) 
+let sleep time (Paused x) = Paused (time + x)
+#+end_src
+
+** 
+
+#+BEGIN_SRC ocaml
+start () 
+  |> tick 
+  |> pause 
+  |> resume 
+  |> tick
+#+END_SRC
+
+=[ `Running ] state = Running 2=
+
+** 
+
+#+BEGIN_SRC ocaml
+start () 
+  |> tick 
+  |> pause 
+  |> sleep 10 
+  |> resume 
+  |> tick
+#+END_SRC
+
+=[ `Running ] state = Running 12=
+
+** 
+
+#+BEGIN_SRC ocaml
+start () 
+  |> sleep 10
+#+END_SRC
+
+
+*Error*: This expression has type =[ `Paused ] state -> [ `Paused ] state=
+but an expression was expected of type =[ `Running ] state -> 'a=
+These two variant types have no intersection
+
+* Objectif réussi ! 
+
+** Les GADTs pour contraindre des états 
+
+- Ils permettent d'éviter les motifs rémanent ; 
+- ils offrent des outils d'égalité de type fins ;
+- tout en préservant une manière /idiomatique/ de programmer ;
+- malheureusement présents dans peux de langages.
+
+- Avec les types récursifs on peut composer différentes machines à 
+  a états pour construire des scénarios plus complexes.
+
+** Aller plus loin 
+
+- Rendre de plus en plus de partie de son programme "sures" (par exemple, 
+  la distinction entre les listes/vides non vides, option, results) ;
+
+- Intégrer la notion d'effets dans les machines à états ;
+
+- construire des machines à états génériques à coup de monades indexées libres
+  (pour représenter un triplet de Hoare) ;
+
+- intégrer des types dépendants pour la structure de son programme [fn:3]
+
+[fn:3] Pendant longtemps, les types dépendants étaient réservés à l'élaboration 
+       de preuves, depuis l'apparition de langages hybrides comme *Idris*, il 
+       est possible de choisir "à la demande" quand être total ou ne pas 
+       l'être ! 
+
+* Conclusion 
+
+** 
+
+- Les machines à états décrivent des problèmes récurrents ;
+- elles permettent la séparation systèmatique entre les états et les actions ; 
+- dans un langage avec un système de type riche elles amènent certaines garanties ;
+- elles s’adaptent à plusieurs problèmes, le jeu vidéo, le web, les systèmes distribués,l’embarqué ;
+- Kotlin est quand même plus verbeux que OCaml...
+
+Elles peuvent amener une question d'arbitrage entre *le coût de mise en place* 
+et *le coût d'usage*. Dans un langage ML, ce serait dommage de s'en priver.
+
+* Fin @@latex:\\@@ Merci ! (si vous avez envie de venir présenter quelque chose à LilleFP, n'hésitez pas à m'en parler)
