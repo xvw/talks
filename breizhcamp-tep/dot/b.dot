@@ -1,0 +1,11 @@
+digraph G {
+        ratio="compress";
+        rankdir="LR";
+        
+        A[label="Running"];
+        B[label="Paused"];
+        A -> B [label="pause"];
+        B -> A [label="resume"];
+        A -> A [label="tick"];
+        B -> B [label="sleep"];
+}
