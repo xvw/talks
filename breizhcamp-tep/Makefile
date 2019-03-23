@@ -2,7 +2,6 @@ all: slides
 
 slides: a.svg b.svg
 	pandoc -o slides.pdf -t beamer slides.org \
-	  --highlight-style=espresso \
 	  --pdf-engine=xelatex -st beamer
 
 %.svg: dot/%.dot

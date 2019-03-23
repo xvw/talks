@@ -232,23 +232,6 @@ type point = (int * int)
 type named = {firstname: firstname; name: lastname}
 #+end_src
 
-** Le système de types de OCaml : Sommes
-
-*Kotlin* : 
-
-#+begin_src kotlin
-sealed class Option<out T: Any>
-data class Some<out T: Any>(val value : T) : Option<T>()
-object None : Option<Nothing>()
-#+end_src
-
-*OCaml* :
-
-#+begin_src ocaml
-type 'a option = 
-| Some of 'a 
-| None
-#+end_src
 
 
 ** Le système de types de OCaml : Sommes
@@ -285,6 +268,24 @@ Here is an example of a case that is not matched:
 
 ~val to_string : gender -> string = <fun>~
 
+
+** Le système de types de OCaml : Sommes
+
+*Kotlin* : 
+
+#+begin_src kotlin
+sealed class Option<out T: Any>
+data class Some<out T: Any>(val value : T) : Option<T>()
+object None : Option<Nothing>()
+#+end_src
+
+*OCaml* :
+
+#+begin_src ocaml
+type 'a option = 
+| Some of 'a 
+| None
+#+end_src
 
 ** Le système de types de OCaml : Sommes
 
