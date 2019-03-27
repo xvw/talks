@@ -40,10 +40,10 @@
 
 - Raisonner la notion de *programme à états* ;
 - râler sur certains ascenseurs ; 
-- fantasmer sur l'implémentation d'ascenseurs dans des langages indaptés 
+- fantasmer sur l'implémentation d'ascenseurs dans des langages inadaptés 
   \linebreak
   (pour ce /use-case/).
-- présenter *les machines à états* (finis) ;
+- présenter *les machines à états* (finies) ;
 - en implémenter dans le contexte  d'un langage  *statiquement typé* ;
 - proposer un /crash-course/ expresse sur le typage.
 
@@ -147,7 +147,7 @@ exécuter l'action *A* et faire une transition vers l'état *S'*.
 ** Par exemple 
 
 #+NAME: fig:SAMPLE1
-#+CAPTION: Une porte représentée comme une machine à états finis
+#+CAPTION: Une porte représentée comme une machine à états finie
 [[./fig/a.svg]]
 
 ** Supports natifs
@@ -179,7 +179,7 @@ exécuter l'action *A* et faire une transition vers l'état *S'*.
 
 *** *Inconvénients potentiels*
 
-- Peu imposer du /boilerplate/ à la définition ; 
+- Peut imposer du /boilerplate/ à la définition ; 
 - dur à implémenter dans certains langages (récursion terminale VS 
   /open recursion/).
 
@@ -567,7 +567,7 @@ end
 
 ** 
 
-=resume= et =pause= ne sont pas exhaustive ... 
+=resume= et =pause= ne sont pas exhaustives ... 
 
 #+begin_src ocaml
 
@@ -601,7 +601,7 @@ let x = Bar
 val x : float example = Bar
 #+end_src
 
-** Ils permettent de rendre exhaustif des correspondances de motifs 
+** Ils permettent de rendre exhaustives des correspondances de motifs 
 
 #+begin_src ocaml
 let f x = match x with 
@@ -612,8 +612,8 @@ val f : int example -> string = <fun>
 
 *Au contraire des types fantômes :* 
 
-- Ne nécéssite pas d'abstraire le type sur lequel on travail ;
-- permet de construire des fonction non-surjectives ;
+- Ne nécéssite pas d'abstraire le type sur lequel on travaille ;
+- permet de construire des fonctions non-surjectives ;
 - garder des correspondances de motifs exhaustives "sur des fragments de 
   domaines".
 
@@ -675,18 +675,18 @@ These two variant types have no intersection
 
 ** Les GADTs pour contraindre des états 
 
-- Ils permettent d'éviter les motifs rémanent ; 
+- Ils permettent d'éviter les motifs rémanents ; 
 - ils offrent des outils d'égalité de type fins ;
 - tout en préservant une manière /idiomatique/ de programmer ;
-- malheureusement présents dans peux de langages.
+- malheureusement présents dans peu de langages.
 
 - Avec les types récursifs on peut composer différentes machines à 
-  a états pour construire des scénarios plus complexes.
+  à états pour construire des scénarios plus complexes.
 
 ** Aller plus loin 
 
-- Rendre de plus en plus de partie de son programme "sures" (par exemple, 
-  la distinction entre les listes/vides non vides, option, results) ;
+- Rendre de plus en plus de parties de son programme "sûres" (par exemple, 
+  la distinction entre les listes vides/non vides, option, results) ;
 
 - Intégrer la notion d'effets dans les machines à états ;
 
