@@ -266,7 +266,9 @@ let to_string gender = match gender with
 Here is an example of a case that is not matched:
 ~Other _~ \linebreak
 
-~val to_string : gender -> string = <fun>~
+#+begin_src ocaml
+val to_string : gender -> string = <fun>
+#+end_src
 
 
 ** Le système de types de OCaml : Sommes
@@ -549,7 +551,8 @@ end
 ** Avec une approche plus uniforme 
 
 #+begin_src ocaml
-val le_temps_passe : int -> [< (`Running | `Paused) as 'a ] state -> 'a state
+val le_temps_passe : 
+  int -> [< (`Running | `Paused) as 'a ] state -> 'a state
 
 module My_fsm = struct 
 struct 

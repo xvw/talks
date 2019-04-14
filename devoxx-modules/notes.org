@@ -1,0 +1,7 @@
+#+TITLE: La programmation modulaire
+#+SUBTITLE: Au delà de l'espace de noms
+#+DATE: Avril 2019
+#+AUTHOR: Xavier Van de Woestyne
+#+EMAIL: xaviervdw@gmail.com
+
+
