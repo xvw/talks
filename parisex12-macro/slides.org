@@ -1,0 +1,67 @@
+#+TITLE: Métaprogrammation en Elixir
+#+SUBTITLE: /Quand, comment et pourquoi l'utiliser/
+#+DATE: @@latex:{\color{BlueB}@@\textbf{Paris.ex 12} - Mai 2019@@latex:}@@
+#+AUTHOR: Xavier Van de Woestyne \linebreak ~xaviervdw@gmail.com~ - [[margo.com][margo.com]]
+#+EMAIL: xaviervdw@gmail.com
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_options: [allowframebreaks, aspectratio=169]
+#+LaTeX_HEADER: \usepackage[backend=biber]{biblatex}
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER: \bibliography{bibliography.bib}
+#+LaTeX_HEADER: \usefonttheme{serif}
+#+LaTeX_HEADER: \definecolor{BlueA}{HTML}{031A23}
+#+LaTeX_HEADER: \definecolor{BlueB}{HTML}{137A86}
+#+LaTeX_HEADER: \definecolor{BlueC}{HTML}{50A5A6}
+#+LaTeX_HEADER: \definecolor{LightG}{HTML}{c0c0c0}
+#+LaTeX_HEADER: \setbeamercolor{title}{fg=BlueB}
+#+LaTeX_HEADER: \setbeamercolor{frametitle}{fg=BlueB}
+#+LaTeX_HEADER: \setbeamercolor{structure}{fg=BlueB}
+#+LaTeX_HEADER: \setbeamercolor{normal text}{fg=BlueA}
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \setbeamertemplate{itemize items}[circle]
+#+LaTeX_HEADER: \let\footnoterule\relax
+#+LaTeX_HEADER: \setbeamercolor{footnote}{fg=BlueB}
+#+LaTeX_HEADER: \usepackage{multicol}
+
+#+options: H:2
+
+* Bonjour/Bonsoir !
+
+#+BEGIN_LaTeX
+\begin{columns}
+    \begin{column}{0.48\textwidth}
+        \begin{block}{Xavier Van de Woestyne}
+        \begin{itemize}
+          \item Bruxelles, Lille, Paris 
+          \item \textit{Data Engineer} chez Margo Bank
+        \end{itemize}
+     \end{block}
+     \begin{block}{Réseaux}
+        \begin{itemize}
+          \item https://xvw.github.io
+          \item $vdwxv$ sur Twitter
+          \item $xvw$ sur Github/Gitlab
+          \item $xvw@merveilles.town$ sur Mastodon\newline
+        \end{itemize}
+       \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+     OCaml, F\#, Erlang/Elixir, Kotlin, Io, Ruby, Elm, Racket\newline
+     \begin{block}{LilleFP}
+     \begin{itemize}
+       \item Meetup régulier
+       \item Langages applicatifs
+       \item Programmation fonctionnelle
+       \item Systèmes de types
+       \item Fusion de LilleFP, Lille Elixir, Lille Rust et LilleSUG
+       \item \textbf{On recrute des speakers !}\newline
+     \end{itemize}
+     \end{block}
+    \end{column}
+\end{columns}
+#+END_LaTeX
+
+*Joe Armstrong*, créateur de Erlang, nous a quitté le 20 Avril 2019 : 
+- https://ferd.ca/goodbye-joe.html
+- https://www.lesouffle.org/faire-un-don/
