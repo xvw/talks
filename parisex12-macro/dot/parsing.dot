@@ -1,0 +1,24 @@
+digraph G {
+
+  subgraph a {
+    rank=max;
+    A[shape=none, label="Elixir source code"];
+  }
+
+  subgraph b {
+    rank=max;
+    B[shape=box, label="Parsing"];
+    C[shape=box, label="Expansion"];
+  }
+
+  subgraph d {
+    rank=max;
+    D[shape=box, label="Bytecode generation"];
+    E[shape=none, label="bytecode (.beam)"];
+  }
+  
+  A -> B;
+  B -> C[label="AST"];
+  C -> D[label="Expanded AST"];
+  D -> E;
+}

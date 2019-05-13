@@ -1,8 +1,7 @@
 all: slides
 
-slides:
+slides: parsing.svg ast.svg
 	pandoc -o slides.pdf -t beamer slides.org \
-	  --highlight-style=kate \
 	  --pdf-engine=xelatex -st beamer
 
 tex:

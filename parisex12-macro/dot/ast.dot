@@ -1,0 +1,30 @@
+digraph G {
+
+   ratio="compress";
+
+    subgraph a {
+      C[label="+"];
+      G[label="4"];
+    }
+
+    subgraph b {
+      B[label="+"];
+      F[label="3"];
+    }
+
+    subgraph c {
+      A[label="+"];
+      D[label="1"];
+      E[label="2"];
+    }
+
+    A -> D;
+    A -> E;
+
+    B -> F;
+    B -> A;
+
+    C -> G;
+    C -> B;
+
+}

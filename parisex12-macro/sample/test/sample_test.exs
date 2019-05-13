@@ -9,8 +9,4 @@ defmodule SampleTest do
     assert (1 - 2) == [2, 1]
   end
 
-  test "test dynamic" do
-    assert Sample.call(Sample.Dynamic.A) == "foo"
-    assert Sample.call(Sample.Dynamic.B) == "bar"
-  end
 end

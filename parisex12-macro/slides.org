@@ -61,6 +61,7 @@
     \end{column}
 \end{columns}
 #+END_LaTeX
+
 * Après presque 10 ans de Erlang
 
 #+BEGIN_quote 
@@ -69,27 +70,41 @@ J'appartiens aux gens qui n'ont pas été particulièrement emballé par Elixir
 #+END_quote
 
 - Je préférais la syntaxe de *Erlang* (amoureux de *Prolog*) ;
+
 - j'étais inquiet de la transmissions d'idiomes (Ruby) ;
+
 - donc je trouvais que Elixir ne servait à rien (à tort...).
 
 * Ce qui m'a fait changé d'avis sur Elixir
 
 - *Phoenix* (plus spécifiquement, *Ecto* et *Plug*) ;
+
 - l'unification des types pour les chaines de caractères ;
+
 - les mécanismes de méta-programmation ;
+
 - *mix* ;
+
 - et plus tard : ~gen_stage~ et ~Flow~.
 
-* Sommaire
+* Sommaire et objectifs
 
 - Comprendre ce qu'est /rapidement/ la méta-programmation ;
+
 - survoler les perspectives qu'Elixir offre pour /méta-programmer/ ;
+
 - observer quelques cas d'usages aux *macros* ;
+
 - conclure sur les usages et avantages.\linebreak
 
+
 #+BEGIN_quote 
-Ceci est introduction naïve ... pour les non-initiés
+Ceci est introduction naïve ... pour les non-initiés qui, comme le temps est mon ennemi, 
+n'évoquera malheureusement pas tout ce qu'il est possible de dire sur la méta-programmation
+en Elixir :'(
 #+END_quote
+
+- Ceci n'est pas du tout une présentation technique ! (Désolé...)
 
 * Meta-programmation
 
@@ -101,20 +116,34 @@ des programmes. (d'où le "meta")
 
 * Meta-programmation
 
+
 ** On peut méta-programmer de plusieurs manières 
+
+
+
 - Via la réflexion (implicite ou explicite) ;
+
 - via des raccourcis du langage ;
+
 - via des générateurs de code (par exemple les affreux templates de C++) ;
+
 - via des étapes de compilation (multi-staged metaprogramming) ;
+
 - via des macros ;
-- en utilisant un Lisp (aha !)
+
+- en utilisant un Lisp (aha !)\linebreak
+
 
 * A quoi ça sert ?
 
 - Limiter le *boilerplate* ;
+
 - limiter le *boilerplate* ;
+
 - limiter le *boilerplate* ;
+
 - étendre le langage (eDSL) ;
+
 - déléguer à une machine des tâches rémanantes.\linebreak
 
 #+BEGIN_quote 
@@ -143,6 +172,7 @@ end
 * Génération de code et dérivation d'interfaces
 
 - *Génération*: Behaviour
+
 - *Dérivation*: Protocol \linebreak
 
 #+BEGIN_quote
@@ -154,3 +184,164 @@ Ce sont les manières rapides (et un peu /cheap/) de faire de la
 * Pré-processeur et macros
   #+Beamer: \framesubtitle{On entre enfin dans le vif du sujet !}
 
+Une manière de *transformer* une unité exécutable *avant* son exécution
+
+* Pré-processeur et macros
+  #+Beamer: \framesubtitle{Par exemple}
+
+- ~#include <stdlib.h>~ et ~#define AGE 29~
+
+- Les préprocesseurs CSS (Less, Sass, etc.)
+
+- Les postprocesseurs CSS (aha)
+
+- ~cat myProgram.ex | sed ... | awk ... > myNewProgram.ex~
+
+* Cependant, tout le monde n'agit pas comme des sauvages
+
+- *Lisp* introduit la capacité de manipuler des *quasi-quotations* 
+- elles permettent de manipuler des termes du langages ... comme des termes du langages
+- c'est en partie possible parce que la grammaire du langage est très simple
+- le langage peut être étendu (parfois ... de manière suréaliste, *Racket*).
+
+* Processus de compilation d'un programme Elixir
+
+La grammaire d'Elixir étant plus complexe, on manipule son *AST*.
+
+#+NAME: fig:parsing
+#+CAPTION: Processus de compilation
+[[./fig/parsing.svg]]
+
+- Il sera possible d'injecter des fragments d'AST avant la phase *d'expansion*
+- ces fragments sont des *macros*
+
+* Les macros (enfin !)
+
+- On presque la même sémantique qu'une fonction 
+
+- concrètement, c'est une fonction qui prend des arguments et qui renvoie un fragment d'AST
+
+- résolue avant la phase *d'expansion*
+
+* A quoi ressemble un fragment d'AST ?
+
+
+#+BEGIN_SRC elixir
+1 + 2 + 3 + 4
+#+END_SRC
+
+*  
+
+#+NAME: fig:parsing
+#+CAPTION: Processus de compilation
+[[./fig/ast.svg]]
+
+* 
+
+#+BEGIN_SRC elixir
+{:+, [context: Elixir, import: Kernel],
+ [
+   {:+, [context: Elixir, import: Kernel],
+    [{:+, [context: Elixir, import: Kernel], [1, 2]}, 3]},
+   4
+ ]}
+#+END_SRC
+
+C'est un peu ennuyant à écrire à la main...
+
+* Quotations
+
+Heureusement, Elixir permet, comme Lisp, de manipuler des quotations via la macro ~quote/1~
+
+#+BEGIN_SRC elixir
+
+iex> quote do: if(true, do: "foo", else: "bar")
+
+{:if, [
+   context: Elixir, import: Kernel], [
+     true, [do: "foo", else: "bar"]]}
+#+END_SRC
+
+* 
+
+- Les macros permettent d'injecter, à la compilation, un fragment d'AST *syntaxiquement valide*
+
+- Les quotations permettent de simplifier l'écriture de fragments d'AST
+
+- On peut *dé-quoter* (via ~unquote/1~) des identifiant 
+  (qui seront injectés en fonction du contexte)
+
+- Utilisées par beaucoup de bibliothèques majeures (Ecto, Plug, ExUnit etc.) pour étendre 
+  le langage (via des DSL's)
+
+- Utilisées pour décrire 80% des expressions du langage 
+
+* Un premier exemple : implémentons ~unless~
+  #+Beamer: \framesubtitle{Partiellement volé à la documentation d'Elixir}
+
+#+BEGIN_SRC elixir
+if(x) == unless(x)
+#+END_SRC
+
+* Une première approche au moyen de fonctions
+
+#+BEGIN_SRC elixir
+def my_unless(predicate, do: expression) do
+  if(!predicate, do: expression)
+end
+#+END_SRC
+
+#+BEGIN_SRC elixir
+
+iex(2)> my_unless false, do: IO.puts "foo"
+foo # Ça semble fonctionner
+:ok
+
+iex(1)> my_unless true, do: IO.puts "foo"
+foo # Damn, le "foo" s'affiche tout de même !
+nil
+
+
+#+END_SRC
+
+* Utilisation de la paresse pour corriger l'approche fonctionnelle
+
+#+BEGIN_SRC elixir
+def my_unless(predicate, do: expression) do
+  if(!predicate, do: expression.())
+end
+#+END_SRC
+
+#+BEGIN_SRC elixir
+
+iex(1)> my_unless false, do: fn() -> IO.puts "foo" end
+foo
+:ok
+
+iex(2)> my_unless true, do: fn () ->IO.puts "foo" end
+nil # Victoire !
+
+#+END_SRC
+
+Mais c'est ... un peu laid... on est loin d'un DSL.
+
+* Utilisation de macro
+
+#+BEGIN_SRC elixir
+  defmacro my_unless(predicate, do: expression) do
+    quote do
+      if(! unquote(predicate), do: unquote(expression))
+    end
+  end
+#+END_SRC
+
+#+BEGIN_SRC elixir
+iex(9)> require Sample
+iex(10)> Sample.my_unless false, do: IO.puts "foo"
+foo
+:ok
+
+iex(11)> Sample.my_unless true, do: IO.puts "foo"
+nil # Victoire Réelle !
+
+#+END_SRC

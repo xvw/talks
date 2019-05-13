@@ -1,18 +1,15 @@
 defmodule Sample do
+
+  defmacro my_unless(predicate, do: expression) do
+    quote do
+      if(! unquote(predicate), do: unquote(expression))
+    end
+  end
+  
   def x + y, do: [x, y]
   def x - y, do: [y, x]
 
-  defmodule Dynamic do
-    defmodule A do
-      def f, do: "foo"
-    end
-    defmodule B do
-      def f, do: "bar"
-    end
-  end
-
-  def call(module) do
-    module.f
-  end
+          
+          
 end
 
