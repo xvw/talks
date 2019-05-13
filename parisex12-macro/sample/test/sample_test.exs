@@ -3,10 +3,8 @@ defmodule SampleTest do
   doctest Sample
 
   test "Test for +" do
-    import Kernel, except: [+: 2, -: 2]
     import Sample
-    assert (1 + 2) == [1, 2]
-    assert (1 - 2) == [2, 1]
+    assert add(m(100), cm(100)) == m(101)
   end
 
 end

@@ -345,3 +345,200 @@ iex(11)> Sample.my_unless true, do: IO.puts "foo"
 nil # Victoire Réelle !
 
 #+END_SRC
+
+
+* Un autre exemple : overloading
+
+#+BEGIN_SRC elixir
+
+defmodule Sample do
+  def x + y, do: [x, y]
+  def x - y, do: [y, x]
+end
+
+test "Test for +" do
+  import Sample
+  assert (1 + 2) == [1, 2]
+  assert (1 - 2) == [2, 1]
+end
+
+#+END_SRC
+
+
+*  
+
+#+BEGIN_SRC elixir
+== Compilation error in file test/sample_test.exs ==
+** (CompileError) test/sample_test.exs:8: function +/2 imported from both 
+                  Sample and Kernel, call is ambiguous
+    (ex_unit) expanding macro: ExUnit.Assertions.assert/1
+    test/sample_test.exs:8: SampleTest."test Test for +"/1
+    (elixir) lib/code.ex:767: Code.require_file/2
+    (elixir) lib/kernel/parallel_compiler.ex:211: anonymous fn/4 in 
+              Kernel.ParallelCompiler.spawn_workers/6
+#+END_SRC
+
+* Solution 
+
+#+BEGIN_SRC elixir
+test "Test for +" do
+  import Kernel, except: [+: 2, -: 2]
+  import Sample
+  assert (1 + 2) == [1, 2]
+  assert (1 - 2) == [2, 1]
+end
+#+END_SRC
+
+* 
+
+#+BEGIN_LaTeX 
+\begin{center}
+\Huge Utilisons nos super-pouvoirs !
+\end{center}
+#+END_LaTeX
+
+* 
+
+#+BEGIN_SRC elixir
+defmacro overload(methods, from: a, with: b) do 
+    quote do 
+      import unquote(a), except: unquote(methods)
+      import unquote(b), only: unquote(methods)
+    end
+end
+
+
+test "simple overloading" do 
+    import Scope 
+    overload [+: 2, -: 2], from: Kernel, with: Test
+
+    assert [2, [1, 3]] == (1 + 3 - 2)
+end
+#+END_SRC
+
+
+
+
+* Et ... c'est une très mauvaise idée
+
+- Altération de la syntaxe pour de la *featurite*
+
+- Complexifie la compréhension du code pour une futilité (et ce n'est pas cool pour les 
+  co-workers)
+
+- L'utilisation de macros implique un raisonnement en amont !
+
+
+* Gestion complexe d'unités de mesures
+
+** On termine sur un exemple plus complexe !
+
+- Pour un projet : manipulation de distances (m/cm/km) et de durée (sec/min/h/d)
+- Rappel du projet *Mars Climate Orbiter* (+ de 50 millions partit en fumée)
+- Très difficile de tester unitairement l'appartenance à un système métrique
+- Tentative d'approche sans macro
+
+*  
+
+** Simulation de types fantômes (sans les garanties, mais testables)
+
+#+BEGIN_SRC elixir
+
+def cm(x), do: {:cm, x}
+
+def add({base, x}, {base, y}), do: {base, x + y}
+#+END_SRC
+
+* 
+
+** Enrichissement du système
+
+#+BEGIN_SRC elixir
+
+def cm(x), do: {:distance, :cm, x, 100.0}
+
+def m(x), do: {:distance, :m, x, 1.0}
+
+def add({base, ref, x, coeff1}, {base, _,  y, coeff2}) do 
+   {base, ref, x + (y * (coeff1 / coeff2)), coeff1}
+end
+#+END_SRC
+
+* 
+
+#+BEGIN_LaTeX 
+\begin{center}
+\Huge Achievement unlocked ... sans macro !!!!
+\end{center}
+#+END_LaTeX
+
+* 
+#+BEGIN_LaTeX 
+\begin{center}
+\Huge (celsius * 1.8) + 32.0\newline
+... lol, merci les farenheit's !
+\end{center}
+#+END_LaTeX
+
+* Ici typiquement... les macros peuvent servir 
+
+#+BEGIN_SRC elixir
+defmodule Distance do 
+  use Mizur.System
+  type m
+  type cm = m / 100 
+  type mm = m / 1000 
+  type km = m * 1000
+end
+#+END_SRC
+
+* 
+
+#+BEGIN_SRC elixir
+defmodule Time do 
+  use Mizur.System
+  type sec
+  type min  = sec * 60 
+  type hour = sec * 60 * 60
+  type day = sec * 60 * (60 * 24)
+end
+#+END_SRC
+
+* 
+
+#+BEGIN_SRC elixir
+defmodule Temperature do 
+  use Mizur.System, intensive: true
+  type celsius
+  type farenheit = (celsius * 1.8) + 32.0
+end
+#+END_SRC
+
+* 
+
+- Génération d'une API /typesafe/ pour des systèmes métriques
+- grâce aux macros, l'expression arithmétique qui défini un type est inversée 
+  pour offrir une conversion bi-directionnelle sans coût arithmétique complémentaire.
+
+* Concrètement ?
+
+- La méta-programmation est très facile à utiliser 
+- Le mécanisme de macro est un outil puissant et robuste (et facile à utiliser)
+- Intensivement utilisé dans Elixir (pour le langage, Ecto, Phoenix, Plug etc.)
+- On peut être tenter d'en mettre partout... et c'est balot car : 
+  - ça peut complexifier la lecture du code
+  - le débogage 
+
+* Quand s'en servir ? 
+
+- Pour évincer du /boilerplate/ très lourd (par exemple, une requête SQL via des compréhensions)
+- Pour maquiller la plomberie interne d'une bibliothèque.
+
+* 
+
+
+#+BEGIN_LaTeX 
+\begin{center}
+\Huge Merci ! 
+\end{center}
+#+END_LaTeX
