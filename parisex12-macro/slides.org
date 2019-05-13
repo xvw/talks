@@ -1,5 +1,5 @@
 #+TITLE: Métaprogrammation en Elixir
-#+SUBTITLE: /Quand, comment et pourquoi l'utiliser/
+#+SUBTITLE: /Une introduction naïve/
 #+DATE: @@latex:{\color{BlueB}@@\textbf{Paris.ex 12} - Mai 2019@@latex:}@@
 #+AUTHOR: Xavier Van de Woestyne \linebreak ~xaviervdw@gmail.com~ - [[margo.com][margo.com]]
 #+EMAIL: xaviervdw@gmail.com
@@ -61,7 +61,96 @@
     \end{column}
 \end{columns}
 #+END_LaTeX
+* Après presque 10 ans de Erlang
 
-*Joe Armstrong*, créateur de Erlang, nous a quitté le 20 Avril 2019 : 
-- https://ferd.ca/goodbye-joe.html
-- https://www.lesouffle.org/faire-un-don/
+#+BEGIN_quote 
+J'appartiens aux gens qui n'ont pas été particulièrement emballé par Elixir
+\linebreak
+#+END_quote
+
+- Je préférais la syntaxe de *Erlang* (amoureux de *Prolog*) ;
+- j'étais inquiet de la transmissions d'idiomes (Ruby) ;
+- donc je trouvais que Elixir ne servait à rien (à tort...).
+
+* Ce qui m'a fait changé d'avis sur Elixir
+
+- *Phoenix* (plus spécifiquement, *Ecto* et *Plug*) ;
+- l'unification des types pour les chaines de caractères ;
+- les mécanismes de méta-programmation ;
+- *mix* ;
+- et plus tard : ~gen_stage~ et ~Flow~.
+
+* Sommaire
+
+- Comprendre ce qu'est /rapidement/ la méta-programmation ;
+- survoler les perspectives qu'Elixir offre pour /méta-programmer/ ;
+- observer quelques cas d'usages aux *macros* ;
+- conclure sur les usages et avantages.\linebreak
+
+#+BEGIN_quote 
+Ceci est introduction naïve ... pour les non-initiés
+#+END_quote
+
+* Meta-programmation
+
+#+BEGIN_quote 
+L'écriture de programme qui manipulent des données *décrivant* elles-mêmes 
+des programmes. (d'où le "meta")
+#+END_quote
+
+
+* Meta-programmation
+
+** On peut méta-programmer de plusieurs manières 
+- Via la réflexion (implicite ou explicite) ;
+- via des raccourcis du langage ;
+- via des générateurs de code (par exemple les affreux templates de C++) ;
+- via des étapes de compilation (multi-staged metaprogramming) ;
+- via des macros ;
+- en utilisant un Lisp (aha !)
+
+* A quoi ça sert ?
+
+- Limiter le *boilerplate* ;
+- limiter le *boilerplate* ;
+- limiter le *boilerplate* ;
+- étendre le langage (eDSL) ;
+- déléguer à une machine des tâches rémanantes.\linebreak
+
+#+BEGIN_quote 
+Elixir offre plusieurs outils de méta-programmation !
+#+END_quote
+
+* 
+
+
+** Introspection via ~Module.__info__(subject)~
+#+BEGIN_src elixir 
+
+iex> Map.__info__(:functions)
+[delete: 2, drop: 2, ... values: 1]
+#+END_src
+
+** /Dispatch/ dynamique
+
+#+BEGIN_src elixir 
+
+def call(module) do
+  apply(module, function, [args])
+end
+#+END_src
+
+* Génération de code et dérivation d'interfaces
+
+- *Génération*: Behaviour
+- *Dérivation*: Protocol \linebreak
+
+#+BEGIN_quote
+
+Ce sont les manières rapides (et un peu /cheap/) de faire de la
+ meta-programmation. 
+#+END_quote
+
+* Pré-processeur et macros
+  #+Beamer: \framesubtitle{On entre enfin dans le vif du sujet !}
+
