@@ -1,0 +1,10 @@
+\documentclass[convert={density=100,outext=.png}]{standalone}
+\usepackage{mathpartir}
+
+\begin{document}
+\begin{mathpar}
+	\inferrule {\Gamma \vdash e : \tau_1 * \tau_2} {\Gamma \vdash fst\;e : \tau_1}
+	\and
+	\inferrule {\Gamma \vdash e : \tau_1 * \tau_2} {\Gamma \vdash snd\;e : \tau_2}
+\end{mathpar}
+\end{document}

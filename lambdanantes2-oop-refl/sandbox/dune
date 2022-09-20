@@ -1,0 +1,2 @@
+(library (name playground) (modules sample))
+(executable (name qrcode) (modules qrcode) (libraries qrc))
